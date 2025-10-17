@@ -1,0 +1,17 @@
+# Ignore Eclipse settings
+.classpath
+.project
+.settings/
+org.eclipse.wst.*
+
+# Ignore build/output folders
+bin/
+target/
+
+# Ignore OS/system files
+.DS_Store
+Thumbs.db
+
+# Ignore log or temp files
+*.log
+*.tmp
