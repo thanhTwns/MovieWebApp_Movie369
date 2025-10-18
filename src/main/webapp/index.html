@@ -1,29 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Movie36</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-</head>
 
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
 <body>
 
-<header>
-	<a href="#" class ="logo">
-		<i class='bx bx-movie-play'></i> Movie36
-	</a>	
-		<div class= "bx bx-menu" id ="menu-icon"></div>
-		
-		<ul class= "navbar"> 
-			<li> <a href= "#home"> Home </a> </li>
-			<li> <a href= "#movies"> Movies </a> </li>
-			<li> <a href= "#coming"> Coming </a> </li>
-			<li> <a href= "#newsletter"> Newsletter </a> </li>
-		</ul>
-		<a href ="#" class ="btn">Sign In</a>
-</header>
+  <!-- Header -->
+  <header>
+    <a href="#" class="logo">
+      <i class="bx bx-movie-play"></i> Movie36
+    </a>
 
+    <div class="bx bx-menu" id="menu-icon" aria-label="Open menu"></div>
+
+    <ul class="navbar">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#movies">Movies</a></li>
+      <li><a href="#coming">Coming</a></li>
+      <li><a href="#newsletter">Newsletter</a></li>
+    </ul>
+
+    <a href="#" class="btn">Sign In</a>
+  </header>
+
+  <!-- Hero / Swiper -->
+  <section class="home swiper" id="home">
+    <div class="swiper-wrapper">
+
+      <!-- slide 1 -->
+      <div class="swiper-slide container">
+        <img src="nhetanhdoday/img1.jpg" alt="Amazing Spider-Man background" />
+        <div class="home-text">
+          <span>Sony</span>
+          <h1>amazing spider-man</h1>
+          <a href="#" class="btn">Watch Now</a>
+          <a href="#" class="play" aria-label="Play trailer">
+            <i class="bx bx-play"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- slide 2 -->
+      <div class="swiper-slide container">
+        <img src="nhetanhdoday/img2.jpg" alt="GenV background" />
+        <div class="home-text">
+          <span>Prime</span>
+          <h1>GenV<br>From the World Of TheBoys</h1>
+          <a href="#" class="btn">Watch Now</a>
+          <a href="#" class="play" aria-label="Play trailer">
+            <i class="bx bx-play"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- slide 3 -->
+      <div class="swiper-slide container">
+        <img src="nhetanhdoday/img3.jpg" alt="The Boys Season 1 background" />
+        <div class="home-text">
+          <span>Prime</span>
+          <h1>The TheBoys<br>Season 1</h1>
+          <a href="#" class="btn">Watch Now</a>
+          <a href="#" class="play" aria-label="Play trailer">
+            <i class="bx bx-play"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- dots -->
+    <div class="swiper-pagination"></div>
+  </section>
+
+  <!-- JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
