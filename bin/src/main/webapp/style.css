@@ -1,0 +1,391 @@
+@charset "UTF-8";
+/* Fonts */
+@import
+	url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap')
+	;
+
+* {
+	font-family: 'Poppins', sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	list-style: none;
+	text-decoration: none;
+	scroll-padding-top: 2rem;
+	scroll-behavior: smooth;
+}
+
+:root {
+	--main-color: #009933;
+	--text-color: #CAF0F8;
+	--bg-color: #020307;
+}
+
+body {
+	background: var(--bg-color);
+	color: var(--text-color);
+}
+
+/* ============ Header ============ */
+header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 20px 100px;
+	transition: .5s;
+}
+
+.logo {
+	font-size: 1.1rem;
+	font-weight: 600;
+	color: var(--text-color);
+	display: flex;
+	align-items: center;
+	column-gap: .5rem;
+}
+
+.logo .bx {
+	font-size: 24px;
+	color: var(--main-color);
+}
+
+.navbar {
+	display: flex; align-items : center;
+	column-gap: 3rem;
+	align-items: center; /*khoảng cách*/
+}
+
+.navbar li {
+	padding: 0;
+}
+
+.navbar a {
+	position: relative; /* để ::after bám đúng vào a */
+	display: inline-block;
+	font-size: 1rem;
+	font-weight: 500;
+	color: var(--text-color);
+}
+	
+.navbar a::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: -4px;
+	height: 2px;
+	width: 0;
+	background: var(--main-color);
+	transition: width .3s linear;
+}
+
+.navbar a:hover::after, .navbar a.active::after {
+	width: 100%;
+}
+
+#menu-icon {
+	font-size: 24px;
+	cursor: pointer;
+	display: none;
+	z-index: 1000001;
+}
+
+.btn {
+	padding: .8rem 1.6rem;
+	background: var(--main-color);
+	color: var(--text-color);
+	font-weight: 600;
+	border-radius: .5rem;
+}
+
+.btn:hover {
+	background: #000;
+}
+/* Style cho hộp search */
+.search-box {
+	display: flex;
+	align-items: center;
+	background: rgba(255, 255, 255, 0.1); /* Nền mờ */
+	border-radius: 2rem; /* Bo tròn */
+	overflow: hidden;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Style cho ô input */
+.search-input {
+	border: none;
+	outline: none;
+	background: transparent;
+	padding: 0.7rem 1rem;
+	color: var(--text-color);
+	font-size: 0.9rem;
+	width: 180px; /* Chiều rộng mặc định */
+	transition: width 0.3s ease;
+}
+
+.search-input::placeholder {
+	color: #b8b8b8;
+}
+
+/* Hiệu ứng khi focus vào input: dài ra */
+.search-input:focus {
+	width: 250px;
+}
+
+/* Style cho nút search (icon) */
+.search-button {
+	border: none;
+	background: transparent;
+	color: var(--text-color);
+	font-size: 1.1rem; /* Cỡ icon */
+	padding: 0 1rem;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	transition: color 0.3s;
+}
+
+.search-button:hover {
+	color: var(--main-color);
+}
+/* ============ Hero / Swiper ============ */
+.home {
+	width: 100%;
+	height: 100vh;
+	position: relative;
+} /* chừa chỗ cho header fixed */
+.container {
+	position: relative;
+	width: 100%;
+	min-height: 640px;
+	display: block;
+	border-radius: 18px;
+	overflow: hidden;
+	background: #000;
+	box-shadow: 0 8px 30px rgba(0, 0, 0, .5);
+}
+
+.container img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+	z-index: 1; /* ảnh dưới overlay nhưng trên nền */
+}
+
+/* Lớp tối để chữ nổi như mẫu */
+.container::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+	background: radial-gradient(60% 100% at 80% 50%, rgba(0, 0, 0, .05),
+		rgba(0, 0, 0, .35)), linear-gradient(0deg, rgba(0, 0, 0, .15),
+		rgba(0, 0, 0, .15)), rgba(2, 3, 7, 0.2);
+}
+
+/* Nội dung chữ bên trái dưới */
+.home-text {
+	position: absolute;
+	left: 28px;
+	bottom: 64px;
+	z-index: 3;
+	max-width: 440px;
+}
+
+.home-text span {
+	color: #d9d9d9;
+	opacity: .95;
+	font-weight: 600;
+	letter-spacing: .2px;
+}
+
+.home-text h1 {
+	margin: 10px 0 16px;
+	line-height: 1.1;
+	font-size: clamp(28px, 5vw, 44px);
+	font-weight: 800;
+}
+
+.play {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	margin-left: 12px;
+	border-radius: 50%;
+	color: #fff;
+	border: 1px solid rgba(255, 255, 255, .25);
+	background: rgba(255, 255, 255, .08);
+}
+
+/* Swiper pagination (dấu chấm) */
+.swiper-pagination-bullet {
+	background: #fff;
+	opacity: .6;
+}
+
+.swiper-pagination-bullet-active {
+	opacity: 1;
+}
+
+/* Responsive */
+@media ( max-width : 992px) {
+	header {
+		padding: 16px 24px;
+	}
+	.navbar {
+		column-gap: 2rem;
+	}
+}
+
+@media ( max-width : 768px) {
+	.home {
+		padding: 84px 12px 12px;
+	}
+	.home-text {
+		left: 18px;
+		right: 18px;
+		bottom: 40px;
+	}
+}
+
+.swiper-pagination-bullet {
+	width: 6px !important;
+	height: 6px !important;
+	border-radius: 0.2rem !important;
+	background: var(--bg-color) !important;
+	opacity: 1 !important;
+}
+
+.swiper-pagination-bullet-active {
+	width: 1.5rem !important;
+	background: var(--main-color) !important;
+}
+
+header.scrolled {
+	/* Thu nhỏ padding lại */
+	padding: 12px 100px;
+	/* Thêm nền cho header */
+	background: var(--bg-color);
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+/*
+  (Để đảm bảo nó nổi lên trên các card phim) 
+*/
+.movies-slider .swiper-button-next, .movies-slider .swiper-button-prev {
+	z-index: 10;
+}
+/* ============ Movies Section ============ */
+.heading {
+	font-size: 1.5rem;
+	font-weight: 600;
+	color: var(--text-color);
+	text-transform: uppercase;
+	margin: 2rem 0;
+	text-align: center;
+	border-bottom: 2px solid var(--main-color);
+	display: inline-block;
+}
+
+/* Căn giữa cái heading */
+.movies {
+	text-align: center;
+	padding: 0 100px;
+	padding-top: 96px;
+}
+
+.movies-slider {
+	margin-top: 2rem;
+}
+
+.movies-slider .movie-box.swiper-slide {
+	/* Cho phép Swiper tự tính toán chiều rộng */
+	width: auto;
+	/* BẮT BUỘC: Giữ lại code flexbox cũ để căn chỉnh nút "Watch Now" */
+	height: auto; /* Để Swiper tự điều chỉnh chiều cao nếu cần */
+	display: flex;
+	flex-direction: column;
+}
+
+/* === TÙY CHỈNH 2 NÚT MŨI TÊN === */
+.movies-slider .swiper-button-next, .movies-slider .swiper-button-prev {
+	/* Đổi màu 2 mũi tên thành màu xanh lá */
+	color: white;
+	top: 45%; /* Căn giữa theo chiều cao của poster */
+}
+
+/* Làm cho mũi tên nhỏ hơn một chút */
+.movies-slider .swiper-button-next::after, .movies-slider .swiper-button-prev::after
+	{
+	font-size: 1.8rem; /* Kích thước icon mũi tên */
+	font-weight: 800;
+}
+
+.movie-box {
+	background: rgba(255, 255, 255, 0.05);
+	border-radius: 0.5rem;
+	overflow: hidden;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+	transition: transform .3s ease;
+}
+
+.movie-box-link {
+	text-decoration: none;
+	color: inherit;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.movie-box:hover {
+	transform: translateY(-10px);
+}
+
+.movie-box-img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.movie-img-wrapper {
+	position: relative;
+	width: 100%;
+	padding-bottom: 150%;
+	overflow: hidden; /* Đảm bảo không có gì tràn ra ngoài */
+}
+
+.box-text {
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+
+.movie-title {
+	font-size: 1.1rem;
+	font-weight: 600;
+	color: var(--text-color);
+	/* Giới hạn tên phim 2 dòng */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+
+.movie-type {
+	font-size: 0.9rem;
+	color: #b8b8b8;
+}
