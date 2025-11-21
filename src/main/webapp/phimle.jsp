@@ -40,10 +40,10 @@
             <!-- 1 CARD PHIM -->
             <article class="phim-card">
                 <div class="phim-poster">
-                    <img src="nhetanhdoday/spm.jpg" alt="Rắc rối săn phù thủy">
+                    <img src="nhetanhdoday/spm.jpg" alt="Superman">
                     <span class="phim-quality">HD Vietsub</span>
                 </div>
-                <h2 class="phim-title">Rắc rối săn phù thủy</h2>
+                <h2 class="phim-title">Superman</h2>
                 <p class="phim-meta">2024 • Hài hước, Viễn tưởng</p>
             </article>
 
@@ -64,6 +64,35 @@
                 <h2 class="phim-title">Furiosa</h2>
                 <p class="phim-meta">2024 • Hành động</p>
             </article>
+             
+            <article class="phim-card">
+                <div class="phim-poster">
+                    <img src="nhetanhdoday/ares.jpg" alt="Ares">
+                    <span class="phim-quality">1080p</span>
+                </div>
+                <h2 class="phim-title">Ares: trò chơi ảo giác</h2>
+                <p class="phim-meta">2024 • Hành động , khoa học viễn tưởng</p>
+            </article>
+
+            <article class="phim-card">
+                <div class="phim-poster">
+                    <img src="nhetanhdoday/fantasic4.jpg" alt="Fantasic4">
+                    <span class="phim-quality">1080p</span>
+                </div>
+                <h2 class="phim-title">Bộ tứ siêu đẳng</h2>
+                <p class="phim-meta">2024 • Hành động</p>
+            </article>
+
+            <article class="phim-card">
+                <div class="phim-poster">
+                    <img src="nhetanhdoday/jw4.jpg" alt="JohnWick4">
+                    <span class="phim-quality">1080p</span>
+                </div>
+                <h2 class="phim-title">JohnWick4</h2>
+                <p class="phim-meta">2024 • Hành động</p>
+            </article>
+
+
 
             <%-- Cứ copy thêm nhiều <article class="phim-card"> ... </article> để đủ 4–5 hàng như hình --%>
 
