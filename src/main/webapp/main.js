@@ -71,66 +71,60 @@ window.addEventListener('scroll', () => {
 		header.classList.remove('scrolled');
 	}
 });
-/* ========================================== */
-/* JS cho Dropdown Menu (Click để mở/đóng)    */
-/* ========================================== */
-
-// 1. Lấy thẻ "Thể loại" và cái menu con của nó
-const dropdownItem = document.querySelector('.dropdown-item');
-const dropdownLink = dropdownItem.querySelector('a'); // Cái link chữ "Thể loại"
-const dropdownMenu = dropdownItem.querySelector('.dropdown-menu');
-
-// 2. Bắt sự kiện click vào chữ "Thể loại"
-dropdownLink.addEventListener('click', function(e) {
-    e.preventDefault(); // Ngăn không cho nó load lại trang hay nhảy link
+document.addEventListener("DOMContentLoaded", function () {
     
-    // Bật/Tắt class 'show' cho menu con
-    dropdownMenu.classList.toggle('show');
+    // 1. Xử lý Menu "Thể loại" (Category)
+    // Chọn đúng cái dropdown không phải là user-profile
+    const categoryDropdown = document.querySelector('.dropdown-item:not(.user-profile)');
     
-    // Bật/Tắt class 'active' cho mục cha (để xoay mũi tên)
-    dropdownItem.classList.toggle('active');
-});
+    if (categoryDropdown) {
+        const categoryLink = categoryDropdown.querySelector('a');
+        const categoryMenu = categoryDropdown.querySelector('.dropdown-menu');
 
-// 3. (Tùy chọn) Click ra ngoài thì tự đóng menu
-document.addEventListener('click', function(e) {
-    // Nếu cái mình click KHÔNG nằm trong dropdown
-    if (!dropdownItem.contains(e.target)) {
-        dropdownMenu.classList.remove('show');
-        dropdownItem.classList.remove('active');
+        categoryLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            // Đóng menu User nếu đang mở
+            if(userProfile) userProfile.classList.remove('active');
+            
+            categoryDropdown.classList.toggle('active');
+            categoryMenu.classList.toggle('show');
+        });
     }
-});
-var swiperSpotlight = new Swiper(".spotlight-slider", {
-  spaceBetween: 30,
-  centeredSlides: true,
-  autoplay: {
-    delay: 4000,
-    disableOnInteraction: false,
-  },
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
-  },
 
-  effect: 'fade', 
-  fadeEffect: {
-    crossFade: true
-  },
-});
-var swiperExplore = new Swiper(".explore-slider", {
-    spaceBetween: 20,
-    loop: true,
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-    },
-    breakpoints: {
-        968: {
-            slidesPerView: 3, // Laptop hiện 3 cái
-            spaceBetween: 20,
-        },
-        1200: {
-            slidesPerView: 4, // Màn to hiện 4 cái
-            spaceBetween: 20,
-        },
-    },
+    // 2. Xử lý Menu "User Profile" (Avatar)
+    const userProfile = document.querySelector('.user-profile');
+    
+    if (userProfile) {
+        const profileToggle = userProfile.querySelector('.profile-toggle');
+        
+        profileToggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation(); // Ngăn sự kiện nổi bọt
+            
+            // Đóng menu Thể loại nếu đang mở
+            if(categoryDropdown) {
+                categoryDropdown.classList.remove('active');
+                categoryDropdown.querySelector('.dropdown-menu').classList.remove('show');
+            }
+
+            // Bật/Tắt menu User
+            userProfile.classList.toggle('active');
+        });
+    }
+
+    // 3. Click ra ngoài thì đóng tất cả
+    document.addEventListener('click', function (e) {
+        // Nếu click ra ngoài Thể loại
+        if (categoryDropdown && !categoryDropdown.contains(e.target)) {
+            categoryDropdown.classList.remove('active');
+            const menu = categoryDropdown.querySelector('.dropdown-menu');
+            if(menu) menu.classList.remove('show');
+        }
+
+        // Nếu click ra ngoài User Profile
+        if (userProfile && !userProfile.contains(e.target)) {
+            userProfile.classList.remove('active');
+        }
+    });
+
 });
