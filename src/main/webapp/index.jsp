@@ -15,7 +15,7 @@
 </head>
 <body>
 
-	<jsp:include page="header.jsp" />
+	<jsp:include page="header.jsp"/>
 
 	<section class="home swiper" id="home">
 		<div class="swiper-wrapper">
