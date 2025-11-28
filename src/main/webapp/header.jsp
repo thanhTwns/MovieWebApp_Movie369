@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%-- Thêm các taglib nếu header của bạn cần (ví dụ: JSTL để hiển thị tên user) --%>
 
 <header>
     <a href="#" class="logo"> <i class="bx bx-movie-play"></i>
