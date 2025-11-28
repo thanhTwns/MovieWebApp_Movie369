@@ -1030,6 +1030,71 @@ header .logo:hover {
 .wide-box:hover .wide-play {
     transform: translate(-50%, -50%) scale(1); /* Hiện lên khi hover */
 }
+
+.user-profile .user-img {
+    width: 40px; /* Kích thước avatar */
+    height: 40px; /* Kích thước avatar */
+    border-radius: 50%; /* Biến thành hình tròn */
+    object-fit: cover; /* Đảm bảo ảnh không bị méo */
+    border: 2px solid var(--main-color); /* Thêm viền (tùy chọn) */
+}
+.dropdown-menu {
+    display: none; /* Ẩn theo mặc định */
+    /* Các thuộc tính khác như position: absolute, background, z-index... */
+}
+
+/* CSS để hiện dropdown menu khi có class 'active' */
+.dropdown-item.active .dropdown-menu,
+.user-profile.active .user-menu { /* Đảm bảo chọn đúng class của bạn */
+    display: block; /* Hiện menu */
+}
+.user-profile.active .user-menu {
+    display: block !important; /* Bắt buộc hiện */
+}
+.user-menu li a {
+    display: block;
+    padding: 10px 20px;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.user-menu li a:hover {
+    background: var(--main-color);
+    color: #fff;
+}	
+.user-profile {
+    position: relative; /* Quan trọng để menu con bám theo */
+    cursor: pointer;
+}
+.user-menu {
+    display: none; /* Ẩn */
+    position: absolute;
+    top: 120%; /* Đẩy xuống dưới một chút */
+    right: 0; /* Căn lề phải cho đẹp */
+    background: rgba(2, 3, 7, 0.95);
+    backdrop-filter: blur(10px);
+    width: 180px;
+    border: 1px solid var(--main-color);
+    border-radius: 0.5rem;
+    padding: 10px 0;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+.profile-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+/* Chỉnh lại tên user cho đẹp hơn*/
+.user-name {
+    font-size: 0.95rem;       /* Cỡ chữ vừa phải */
+    font-weight: 500;         /* Độ đậm */
+    line-height: 1;           /* Giúp chữ gọn gàng hơn */
+    color: var(--text-color);
+}
 /* Nền trang phim lẻ */
 .phimle-page {
     min-height: 100vh;
