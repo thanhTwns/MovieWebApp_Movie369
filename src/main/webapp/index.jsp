@@ -13,9 +13,9 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
-<body>
+<body class="home-page">
 
-	<jsp:include page="header.jsp"/>
+	<jsp:include page="header.jsp" />
 
 	<section class="home swiper" id="home">
 		<div class="swiper-wrapper">
@@ -323,140 +323,155 @@
 	</section>
 	</section>
 
-<section class="spotlight" id="spotlight">
-        <h2 class="spotlight-heading"> <i class='bx bx-line-chart'></i> Xu Hướng Nổi Bật</h2>
+	<section class="spotlight" id="spotlight">
+		<h2 class="spotlight-heading">
+			<i class='bx bx-line-chart'></i> Xu Hướng Nổi Bật
+		</h2>
 
-        <div class="spotlight-slider swiper">
-            <div class="swiper-wrapper">
-                
-                <div class="swiper-slide spotlight-inner">
-                    <div class="spotlight-content">
-                        <span class="spotlight-tag">#1 Hành Động</span>
-                        <h2 class="spotlight-title">John Wick: Chapter 4</h2>
-                        <p class="spotlight-desc">
-                            Sát thủ huyền thoại John Wick tìm ra con đường để đánh bại High Table. 
-                            Nhưng trước khi có thể kiếm được tự do, Wick phải đối đầu với một kẻ thù mới.
-                        </p>
-                        <div class="home-btns" style="display: flex; gap: 1rem; margin-top: 1rem;">
-                            <a href="#" class="btn">Xem Ngay</a>
-                            <a href="#" class="play"><i class='bx bx-info-circle'></i></a>
-                        </div>
-                    </div>
-                    <div class="spotlight-img">
-                        <img src="nhetanhdoday/f1.jpg" alt="John Wick Poster">
-                    </div>
-                </div>
+		<div class="spotlight-slider swiper">
+			<div class="swiper-wrapper">
 
-                <div class="swiper-slide spotlight-inner">
-                    <div class="spotlight-content">
-                        <span class="spotlight-tag">#1 Chính Kịch</span>
-                        <h2 class="spotlight-title">Oppenheimer</h2>
-                        <p class="spotlight-desc">
-                            Câu chuyện về nhà vật lý người Mỹ J. Robert Oppenheimer và vai trò của ông 
-                            trong việc phát triển bom nguyên tử.
-                        </p>
-                        <div class="home-btns" style="display: flex; gap: 1rem; margin-top: 1rem;">
-                            <a href="#" class="btn">Xem Ngay</a>
-                            <a href="#" class="play"><i class='bx bx-info-circle'></i></a>
-                        </div>
-                    </div>
-                    <div class="spotlight-img">
-                        <img src="nhetanhdoday/f1.jpg" alt="Oppenheimer Poster">
-                    </div>
-                </div>
+				<div class="swiper-slide spotlight-inner">
+					<div class="spotlight-content">
+						<span class="spotlight-tag">#1 Hành Động</span>
+						<h2 class="spotlight-title">John Wick: Chapter 4</h2>
+						<p class="spotlight-desc">Sát thủ huyền thoại John Wick tìm ra
+							con đường để đánh bại High Table. Nhưng trước khi có thể kiếm
+							được tự do, Wick phải đối đầu với một kẻ thù mới.</p>
+						<div class="home-btns"
+							style="display: flex; gap: 1rem; margin-top: 1rem;">
+							<a href="#" class="btn">Xem Ngay</a> <a href="#" class="play"><i
+								class='bx bx-info-circle'></i></a>
+						</div>
+					</div>
+					<div class="spotlight-img">
+						<img src="nhetanhdoday/f1.jpg" alt="John Wick Poster">
+					</div>
+				</div>
 
-                </div>
-            <div class="swiper-pagination"></div>
-        </div>
-    </section>
-    <section class="explore" id="explore">
-        <h2 class="heading" style="text-align: left; border: none; margin-left: 0;">
-            <i class='bx bx-collection'></i> Bộ Sưu Tập Tuyển Chọn
-        </h2>
-        
-        <div class="explore-slider swiper">
-            <div class="swiper-wrapper">
-                
-                <div class="swiper-slide wide-box">
-                    <a href="movie-page.html">
-                        <div class="wide-img">
-                            <img src="nhetanhdoday/asm.jpg" alt=""> <div class="wide-play"><i class='bx bx-play'></i></div>
-                            <div class="wide-overlay">
-                                <div class="wide-text">
-                                    <span>Marvel</span>
-                                    <h3>Vũ Trụ Người Nhện</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+				<div class="swiper-slide spotlight-inner">
+					<div class="spotlight-content">
+						<span class="spotlight-tag">#1 Chính Kịch</span>
+						<h2 class="spotlight-title">Oppenheimer</h2>
+						<p class="spotlight-desc">Câu chuyện về nhà vật lý người Mỹ J.
+							Robert Oppenheimer và vai trò của ông trong việc phát triển bom
+							nguyên tử.</p>
+						<div class="home-btns"
+							style="display: flex; gap: 1rem; margin-top: 1rem;">
+							<a href="#" class="btn">Xem Ngay</a> <a href="#" class="play"><i
+								class='bx bx-info-circle'></i></a>
+						</div>
+					</div>
+					<div class="spotlight-img">
+						<img src="nhetanhdoday/f1.jpg" alt="Oppenheimer Poster">
+					</div>
+				</div>
 
-                <div class="swiper-slide wide-box">
-                    <a href="movie-page.html">
-                        <div class="wide-img">
-                            <img src="nhetanhdoday/f1.jpg" alt="">
-                            <div class="wide-play"><i class='bx bx-play'></i></div>
-                            <div class="wide-overlay">
-                                <div class="wide-text">
-                                    <span>Thể Thao</span>
-                                    <h3>Tốc Độ & Kịch Tính</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="swiper-slide wide-box">
-                    <a href="movie-page.html">
-                        <div class="wide-img">
-                            <img src="nhetanhdoday/conjuring_poster.jpg" alt="">
-                            <div class="wide-play"><i class='bx bx-play'></i></div>
-                            <div class="wide-overlay">
-                                <div class="wide-text">
-                                    <span>Kinh Dị</span>
-                                    <h3>Vũ Trụ The Conjuring</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="swiper-slide wide-box">
-                    <a href="movie-page.html">
-                        <div class="wide-img">
-                            <img src="nhetanhdoday/genv.jpg" alt="">
-                            <div class="wide-play"><i class='bx bx-play'></i></div>
-                            <div class="wide-overlay">
-                                <div class="wide-text">
-                                    <span>Series</span>
-                                    <h3>Thế Giới The Boys</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="swiper-slide wide-box">
-                    <a href="movie-page.html">
-                        <div class="wide-img">
-                            <img src="nhetanhdoday/fantasic4.jpg" alt="">
-                            <div class="wide-play"><i class='bx bx-play'></i></div>
-                            <div class="wide-overlay">
-                                <div class="wide-text">
-                                    <span>Marvel</span>
-                                    <h3>Biệt Đội Siêu Anh Hùng</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-            </div>
-            <div class="swiper-button-next"></div>
+			</div>
+			<div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
-        </div>
-    </section>
-		<section class="movies" id="phimle">
+		</div>
+	</section>
+	<section class="explore" id="explore">
+		<h2 class="heading"
+			style="text-align: left; border: none; margin-left: 0;">
+			<i class='bx bx-collection'></i> Bộ Sưu Tập Tuyển Chọn
+		</h2>
+
+		<div class="explore-slider swiper">
+			<div class="swiper-wrapper">
+
+				<div class="swiper-slide wide-box">
+					<a href="movie-page.html">
+						<div class="wide-img">
+							<img src="nhetanhdoday/asm.jpg" alt="">
+							<div class="wide-play">
+								<i class='bx bx-play'></i>
+							</div>
+							<div class="wide-overlay">
+								<div class="wide-text">
+									<span>Marvel</span>
+									<h3>Vũ Trụ Người Nhện</h3>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+
+				<div class="swiper-slide wide-box">
+					<a href="movie-page.html">
+						<div class="wide-img">
+							<img src="nhetanhdoday/f1.jpg" alt="">
+							<div class="wide-play">
+								<i class='bx bx-play'></i>
+							</div>
+							<div class="wide-overlay">
+								<div class="wide-text">
+									<span>Thể Thao</span>
+									<h3>Tốc Độ & Kịch Tính</h3>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+
+				<div class="swiper-slide wide-box">
+					<a href="movie-page.html">
+						<div class="wide-img">
+							<img src="nhetanhdoday/conjuring_poster.jpg" alt="">
+							<div class="wide-play">
+								<i class='bx bx-play'></i>
+							</div>
+							<div class="wide-overlay">
+								<div class="wide-text">
+									<span>Kinh Dị</span>
+									<h3>Vũ Trụ The Conjuring</h3>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+
+				<div class="swiper-slide wide-box">
+					<a href="movie-page.html">
+						<div class="wide-img">
+							<img src="nhetanhdoday/genv.jpg" alt="">
+							<div class="wide-play">
+								<i class='bx bx-play'></i>
+							</div>
+							<div class="wide-overlay">
+								<div class="wide-text">
+									<span>Series</span>
+									<h3>Thế Giới The Boys</h3>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+
+				<div class="swiper-slide wide-box">
+					<a href="movie-page.html">
+						<div class="wide-img">
+							<img src="nhetanhdoday/fantasic4.jpg" alt="">
+							<div class="wide-play">
+								<i class='bx bx-play'></i>
+							</div>
+							<div class="wide-overlay">
+								<div class="wide-text">
+									<span>Marvel</span>
+									<h3>Biệt Đội Siêu Anh Hùng</h3>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+
+			</div>
+			<div class="swiper-button-next"></div>
+			<div class="swiper-button-prev"></div>
+		</div>
+	</section>
+	<section class="movies" id="phimle">
 		<h2 class="heading">Phim Sắp Chiếu</h2>
 
 		<div class="movies-slider swiper">

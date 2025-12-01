@@ -1,82 +1,108 @@
 /* ====================================================== */
-/* 1. Code cho "Hero Slider"*/
+/* MAIN.JS - ĐÃ SỬA LỖI & TỐI ƯU CHO MỌI TRANG            */
 /* ====================================================== */
-var swiperHome = new Swiper(".home.swiper", {
-	spaceBetween: 30,
-	centeredSlides: true,
-	loop: true,
-	autoplay: {
-		delay: 5000,
-		disableOnInteraction: false,
-	},
-	pagination: {
-		el: ".swiper-pagination",
-		clickable: true,
-	},
-});
 
-/* ====================================================== */
-/* 2. (Code này để chạy slider, tạo khoảng cách 25px và kích hoạt nút) */
-/* ====================================================== */
-var swiperMovies = new Swiper(".movies-slider", {
-	loop: true,
-
-	// Khoảng cách 25px
-	spaceBetween: 25,
-
-	// Kích hoạt 2 nút mũi tên
-	navigation: {
-		nextEl: ".swiper-button-next",
-		prevEl: ".swiper-button-prev",
-	},
-
-	// Responsive: Hiển thị 4 phim trên desktop
-	breakpoints: {
-		0: { slidesPerView: 1.5, spaceBetween: 15 },
-		520: { slidesPerView: 2, spaceBetween: 15 },
-		768: { slidesPerView: 3, spaceBetween: 20 },
-		// Yêu cầu của bạn: 4 phim
-		1024: {
-			slidesPerView: 5,
-			spaceBetween: 25
-		},
-		1200: {
-			slidesPerView: 5,
-			spaceBetween: 25
-		}
-	}
-});
-var swiperTrending = new Swiper(".trending-slider", {
-  slidesPerView: 1,
-  spaceBetween: 15,
-  loop: true,
-  breakpoints: {
-    450: { slidesPerView: 2, spaceBetween: 15 },
-    768: { slidesPerView: 3, spaceBetween: 20 },
-    1024: { slidesPerView: 4, spaceBetween: 20 },
-    1200: { slidesPerView: 5, spaceBetween: 20 }
-  }
-});
-
-/* ====================================================== */
-/* 3. Code cho Header "Thu nhỏ khi cuộn" */
-/* ====================================================== */
-let header = document.querySelector('header');
-
-window.addEventListener('scroll', () => {
-	// Nếu cuộn chuột xuống hơn 50px
-	if (window.scrollY > 50) {
-		header.classList.add('scrolled');
-	} else {
-		header.classList.remove('scrolled');
-	}
-});
 document.addEventListener("DOMContentLoaded", function () {
+
+    /* ====================================================== */
+    /* 1. Code cho "Hero Slider" (Chỉ chạy nếu có .home.swiper) */
+    /* ====================================================== */
+    if (document.querySelector(".home.swiper")) {
+        var swiperHome = new Swiper(".home.swiper", {
+            spaceBetween: 30,
+            centeredSlides: true,
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+        });
+    }
+
+    /* ====================================================== */
+    /* 2. Slider Phim (Movies Slider)                         */
+    /* ====================================================== */
+    if (document.querySelector(".movies-slider")) {
+        var swiperMovies = new Swiper(".movies-slider", {
+            loop: true,
+            spaceBetween: 25,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+                0: { slidesPerView: 1.5, spaceBetween: 15 },
+                520: { slidesPerView: 2, spaceBetween: 15 },
+                768: { slidesPerView: 3, spaceBetween: 20 },
+                1024: { slidesPerView: 5, spaceBetween: 25 },
+                1200: { slidesPerView: 5, spaceBetween: 25 }
+            }
+        });
+    }
+
+    /* ====================================================== */
+    /* 3. Slider Trending (Nếu có sử dụng)                    */
+    /* ====================================================== */
+    if (document.querySelector(".trending-slider")) {
+        var swiperTrending = new Swiper(".trending-slider", {
+            slidesPerView: 1,
+            spaceBetween: 15,
+            loop: true,
+            breakpoints: {
+                450: { slidesPerView: 2, spaceBetween: 15 },
+                768: { slidesPerView: 3, spaceBetween: 20 },
+                1024: { slidesPerView: 4, spaceBetween: 20 },
+                1200: { slidesPerView: 5, spaceBetween: 20 }
+            }
+        });
+    }
+
+    /* ====================================================== */
+    /* 4. Slider Explore (Bộ sưu tập - 3 phim/hàng)           */
+    /* ====================================================== */
+    if (document.querySelector(".explore-slider")) {
+        var swiperExplore = new Swiper(".explore-slider", {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            centeredSlides: false,
+            navigation: {
+                nextEl: ".explore-slider .swiper-button-next",
+                prevEl: ".explore-slider .swiper-button-prev",
+            },
+            breakpoints: {
+                768: { slidesPerView: 2, spaceBetween: 20 },
+                1200: { slidesPerView: 3, spaceBetween: 25 },
+            },
+        });
+    }
+
+    /* ====================================================== */
+    /* 5. Header "Thu nhỏ khi cuộn"                           */
+    /* ====================================================== */
+    let header = document.querySelector('header');
+    if (header) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    }
+
+    /* ====================================================== */
+    /* 6. Xử lý Dropdown Menu & User Profile                  */
+    /* ====================================================== */
     
-    // 1. Xử lý Menu "Thể loại" (Category)
-    // Chọn đúng cái dropdown không phải là user-profile
+    // 6.1 Xử lý Menu "Thể loại"
     const categoryDropdown = document.querySelector('.dropdown-item:not(.user-profile)');
-    
+    const userProfile = document.querySelector('.user-profile');
+
     if (categoryDropdown) {
         const categoryLink = categoryDropdown.querySelector('a');
         const categoryMenu = categoryDropdown.querySelector('.dropdown-menu');
@@ -84,16 +110,14 @@ document.addEventListener("DOMContentLoaded", function () {
         categoryLink.addEventListener('click', function (e) {
             e.preventDefault();
             // Đóng menu User nếu đang mở
-            if(userProfile) userProfile.classList.remove('active');
+            if (userProfile) userProfile.classList.remove('active');
             
             categoryDropdown.classList.toggle('active');
             categoryMenu.classList.toggle('show');
         });
     }
 
-    // 2. Xử lý Menu "User Profile" (Avatar)
-    const userProfile = document.querySelector('.user-profile');
-    
+    // 6.2 Xử lý Menu "User Profile" (Avatar)
     if (userProfile) {
         const profileToggle = userProfile.querySelector('.profile-toggle');
         
@@ -102,9 +126,10 @@ document.addEventListener("DOMContentLoaded", function () {
             e.stopPropagation(); // Ngăn sự kiện nổi bọt
             
             // Đóng menu Thể loại nếu đang mở
-            if(categoryDropdown) {
+            if (categoryDropdown) {
                 categoryDropdown.classList.remove('active');
-                categoryDropdown.querySelector('.dropdown-menu').classList.remove('show');
+                const catMenu = categoryDropdown.querySelector('.dropdown-menu');
+                if (catMenu) catMenu.classList.remove('show');
             }
 
             // Bật/Tắt menu User
@@ -112,13 +137,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // 3. Click ra ngoài thì đóng tất cả
+    // 6.3 Click ra ngoài thì đóng tất cả
     document.addEventListener('click', function (e) {
         // Nếu click ra ngoài Thể loại
         if (categoryDropdown && !categoryDropdown.contains(e.target)) {
             categoryDropdown.classList.remove('active');
             const menu = categoryDropdown.querySelector('.dropdown-menu');
-            if(menu) menu.classList.remove('show');
+            if (menu) menu.classList.remove('show');
         }
 
         // Nếu click ra ngoài User Profile
@@ -128,3 +153,22 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+if (document.querySelector(".spotlight-slider")) {
+    var swiperSpotlight = new Swiper(".spotlight-slider", {
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+        },
+        // Hiệu ứng mờ dần (Fade) cho đẹp
+        effect: 'fade', 
+        fadeEffect: { crossFade: true },
+        
+        // KÍCH HOẠT NÚT MŨI TÊN
+        navigation: {
+            nextEl: ".spotlight-slider .swiper-button-next",
+            prevEl: ".spotlight-slider .swiper-button-prev",
+        },
+    });
+}
