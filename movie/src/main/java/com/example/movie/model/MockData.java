@@ -1,4 +1,4 @@
-package model;
+package com.example.movie.model;
 
 import java.util.HashMap;
 import java.util.Map;
