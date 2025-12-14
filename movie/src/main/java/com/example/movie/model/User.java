@@ -1,4 +1,4 @@
-package model;
+package com.example.movie.model;
 
 public class User {
 
