@@ -1735,3 +1735,174 @@ header .logo:hover {
 	.movie-info-page .mi-right { order: 3; }
 	.movie-info-page .mi-poster-side, .movie-info-page .btn-watch-main { width: 180px; }
 }
+
+/* =============================================================
+   PHẦN ADMIN DASHBOARD (Dán nối tiếp vào cuối file style.css)
+   Lưu ý: Code này chỉ chạy khi body có class="admin-page"
+   ============================================================= */
+
+/* 1. Cấu trúc nền tảng cho Admin */
+body.admin-page {
+	margin: 0; padding: 0; box-sizing: border-box;
+	background: #020307;
+	color: #fff;
+	display: flex; /* Quan trọng để chia cột Sidebar và Main */
+	min-height: 100vh;
+	font-family: 'Poppins', sans-serif;
+}
+
+/* 2. Sidebar (Thanh menu trái) */
+.admin-page .sidebar {
+	width: 260px;
+	background: #0f0f0f;
+	border-right: 1px solid rgba(255, 255, 255, 0.1);
+	padding: 20px;
+	position: fixed;
+	height: 100%;
+	top: 0; left: 0;
+	z-index: 1000;
+	transition: all 0.3s;
+}
+
+.admin-page .logo {
+	font-size: 1.5rem; font-weight: 700; color: #00b943;
+	display: flex; align-items: center; gap: 10px; margin-bottom: 40px; text-decoration: none;
+}
+
+.admin-page .menu-item {
+	display: flex; align-items: center; gap: 10px;
+	padding: 12px 15px; color: #b7b7b7; border-radius: 8px; margin-bottom: 5px;
+	transition: 0.3s; font-size: 1rem; text-decoration: none;
+}
+
+.admin-page .menu-item:hover,
+.admin-page .menu-item.active {
+	background: #00b943; color: #fff;
+}
+
+.admin-page .menu-item i { font-size: 1.3rem; }
+
+/* 3. Main Content (Nội dung chính bên phải) */
+.admin-page .main-content {
+	margin-left: 260px; /* Đẩy nội dung sang phải né Sidebar */
+	flex: 1;
+	padding: 30px;
+	width: calc(100% - 260px);
+}
+
+/* Header */
+.admin-page .header-admin {
+	display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;
+}
+
+.admin-page .user-info {
+	display: flex; align-items: center; gap: 15px;
+}
+
+.admin-page .user-img {
+	width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #00b943;
+}
+
+/* Stats Cards (Thẻ thống kê) */
+.admin-page .stats-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: 20px;
+	margin-bottom: 30px;
+}
+
+.admin-page .card {
+	background: rgba(255, 255, 255, 0.05);
+	padding: 20px;
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	display: flex; justify-content: space-between; align-items: center;
+}
+
+.admin-page .card-info h3 {
+	font-size: 1.8rem; margin-bottom: 5px; color: #fff; margin-top: 0;
+}
+
+.admin-page .card-info p {
+	color: #b7b7b7; font-size: 0.9rem; margin: 0;
+}
+
+.admin-page .card-icon {
+	font-size: 2.5rem;
+	color: #00b943;
+	background: rgba(0, 185, 67, 0.1);
+	padding: 10px; border-radius: 50%;
+}
+
+/* Table (Bảng danh sách) */
+.admin-page .table-container {
+	background: rgba(255, 255, 255, 0.05);
+	padding: 20px;
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	overflow-x: auto;
+}
+
+.admin-page .table-header {
+	display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+}
+
+.admin-page .btn-add {
+	background: #00b943; color: #fff;
+	padding: 8px 16px; border-radius: 5px;
+	font-weight: 500; border: none; cursor: pointer;
+	display: flex; align-items: center; gap: 5px;
+}
+
+.admin-page table {
+	width: 100%; border-collapse: collapse;
+}
+
+.admin-page th, .admin-page td {
+	padding: 12px 15px;
+	text-align: left;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	color: #fff;
+}
+
+.admin-page th {
+	color: #b7b7b7; font-weight: 500; font-size: 0.9rem;
+}
+
+.admin-page .poster-cell img {
+	width: 40px; height: 60px; object-fit: cover; border-radius: 4px;
+}
+
+/* Status & Buttons */
+.admin-page .status {
+	padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;
+}
+
+.admin-page .status.active {
+	background: rgba(0, 185, 67, 0.2); color: #00b943;
+}
+
+.admin-page .status.pending {
+	background: rgba(255, 193, 7, 0.2); color: #ffc107;
+}
+
+.admin-page .action-btn {
+	padding: 6px; border-radius: 4px;
+	cursor: pointer; border: none; margin-right: 5px;
+}
+
+.admin-page .btn-edit {
+	background: rgba(0, 123, 255, 0.2); color: #007bff;
+}
+
+.admin-page .btn-delete {
+	background: rgba(220, 53, 69, 0.2); color: #dc3545;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+	.admin-page .sidebar { width: 70px; padding: 20px 10px; }
+	.admin-page .menu-item span, .admin-page .logo span { display: none; }
+	.admin-page .main-content { margin-left: 70px; width: calc(100% - 70px); padding: 15px; }
+	.admin-page .menu-item { justify-content: center; }
+}
