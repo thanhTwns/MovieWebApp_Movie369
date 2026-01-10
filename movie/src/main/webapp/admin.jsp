@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -22,12 +22,9 @@
     </a>
 
     <ul class="menu">
-        <li><a href="#" class="menu-item active"><i class='bx bxs-dashboard'></i> <span>Dashboard</span></a></li>
-        <li><a href="#" class="menu-item"><i class='bx bxs-movie'></i> <span>Quản lý Phim</span></a></li>
-        <li><a href="#" class="menu-item"><i class='bx bxs-user-detail'></i> <span>Người dùng</span></a></li>
-        <li><a href="#" class="menu-item"><i class='bx bxs-comment-detail'></i> <span>Bình luận</span></a></li>
-        <li><a href="#" class="menu-item"><i class='bx bxs-cog'></i> <span>Cài đặt</span></a></li>
-        <li><a href="#" class="menu-item" style="color: #dc3545;"><i class='bx bx-log-out'></i> <span>Đăng xuất</span></a></li>
+        <li><a href="admin" class="menu-item active"><i class='bx bxs-dashboard'></i> <span>Dashboard</span></a></li>
+        <li><a href="LogoutServlet" class="menu-item" style="color: #dc3545;"><i class='bx bx-log-out'></i>
+            <span>Đăng xuất</span></a></li>
     </ul>
 </div>
 
@@ -36,37 +33,41 @@
     <div class="header-admin">
         <h2>Tổng quan</h2>
         <div class="user-info">
-            <span>Xin chào, <b>Admin</b></span>
-            <img src="${pageContext.request.contextPath}/nhetanhdoday/default-avatar.jpg" alt="Admin" class="user-img">
+            <span>Xin chào, <b>${sessionScope.account.username != null ? sessionScope.account.username : 'Admin'}</b></span>
+            <img src="${sessionScope.account.avatarUrl != null ? sessionScope.account.avatarUrl : pageContext.request.contextPath.concat('/nhetanhdoday/default-avatar.jpg')}"
+                 alt="Admin" class="user-img">
         </div>
     </div>
 
     <div class="stats-grid">
         <div class="card">
             <div class="card-info">
-                <h3>150</h3>
+                <h3>${totalMovies}</h3>
                 <p>Tổng số phim</p>
             </div>
             <div class="card-icon"><i class='bx bxs-movie-play'></i></div>
         </div>
+
         <div class="card">
             <div class="card-info">
-                <h3>1,250</h3>
+                <h3><fmt:formatNumber value="${totalUsers}" type="number"/></h3>
                 <p>Người dùng</p>
             </div>
             <div class="card-icon"><i class='bx bxs-group'></i></div>
         </div>
+
         <div class="card">
             <div class="card-info">
-                <h3>45.2K</h3>
+                <h3><fmt:formatNumber value="${totalViews}" type="number"/></h3>
                 <p>Lượt xem</p>
             </div>
             <div class="card-icon"><i class='bx bxs-show'></i></div>
         </div>
+
         <div class="card">
             <div class="card-info">
-                <h3>$3,400</h3>
-                <p>Doanh thu</p>
+                <h3><fmt:formatNumber value="${totalRevenue}" type="currency" currencySymbol="VND"/></h3>
+                <p>Doanh thu ước tính</p>
             </div>
             <div class="card-icon"><i class='bx bxs-dollar-circle'></i></div>
         </div>
@@ -75,7 +76,10 @@
     <div class="table-container">
         <div class="table-header">
             <h3>Danh sách phim mới nhất</h3>
-            <button class="btn-add"><i class='bx bx-plus'></i> Thêm phim mới</button>
+
+            <a href="movie-form" class="btn-add" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 5px;">
+                <i class='bx bx-plus'></i> Thêm phim mới
+            </a>
         </div>
 
         <table>
@@ -91,38 +95,47 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>#001</td>
-                <td class="poster-cell">
-                    <img src="${pageContext.request.contextPath}/nhetanhdoday/thầy bạch.jpg" alt="">
-                </td>
-                <td>Breaking Bad</td>
-                <td>Hành động, Tội phạm</td>
-                <td>2025</td>
-                <td><span class="status active">Hiển thị</span></td>
-                <td>
-                    <button class="action-btn btn-edit"><i class='bx bx-edit'></i></button>
-                    <button class="action-btn btn-delete"><i class='bx bx-trash'></i></button>
-                </td>
-            </tr>
+            <c:forEach items="${listMovies}" var="m">
+                <tr>
+                    <td>#${m.id}</td>
+                    <td class="poster-cell">
+                        <img src="${m.posterUrl.startsWith('http') ? m.posterUrl : pageContext.request.contextPath.concat('/').concat(m.posterUrl)}"
+                             alt="${m.title}">
+                    </td>
+                    <td>${m.title}</td>
 
-            <tr>
-                <td>#002</td>
-                <td class="poster-cell">
-                    <img src="${pageContext.request.contextPath}/nhetanhdoday/arcane.jpg" alt="">
-                </td>
-                <td>Arcane</td>
-                <td>Hoạt hình, Viễn tưởng</td>
-                <td>2024</td>
-                <td><span class="status pending">Chờ duyệt</span></td>
-                <td>
-                    <button class="action-btn btn-edit"><i class='bx bx-edit'></i></button>
-                    <button class="action-btn btn-delete"><i class='bx bx-trash'></i></button>
-                </td>
-            </tr>
+                    <td>${m.series ? "Phim Bộ" : "Phim Lẻ"}</td>
+
+                    <td>${m.releaseYear}</td>
+
+                    <td>
+                        <span class="status ${m.premium ? 'active' : 'pending'}">
+                                ${m.premium ? "Premium" : "Free"}
+                        </span>
+                    </td>
+
+                    <td>
+                        <a href="movie-form?id=${m.id}" class="action-btn btn-edit" style="display: inline-block; padding: 6px;">
+                            <i class='bx bx-edit'></i>
+                        </a>
+
+                        <a href="#" onclick="confirmDelete(${m.id})" class="action-btn btn-delete" style="display: inline-block; padding: 6px;">
+                            <i class='bx bx-trash'></i>
+                        </a>
+                    </td>
+                </tr>
+            </c:forEach>
             </tbody>
         </table>
     </div>
 </main>
+
+<script>
+    function confirmDelete(id) {
+        if (confirm("Bạn có chắc chắn muốn xóa phim có ID = " + id + " không?")) {
+            window.location.href = "deleteMovie?id=" + id;
+        }
+    }
+</script>
 </body>
 </html>

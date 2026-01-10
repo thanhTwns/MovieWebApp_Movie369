@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<script src="${pageContext.request.contextPath}/main.js"></script>
 <footer class="footer">
     <div class="footer-container">
         <div class="footer-box">
