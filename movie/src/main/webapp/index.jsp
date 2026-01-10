@@ -1,596 +1,291 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="vn">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Movie369</title>
-<%--	<base href="${pageContext.request.contextPath}">--%>
-
-<link rel="stylesheet" href="style.css" />
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Movie369</title>
+    <%--	<base href="${pageContext.request.contextPath}">--%>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css"/>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"/>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
 <body class="home-page">
+<jsp:include page="header.jsp"/>
+<section class="home swiper" id="home">
+    <div class="swiper-wrapper">
 
-	<jsp:include page="header.jsp" />
+        <c:forEach items="${phimtrending}" var="t">
+            <div class="swiper-slide container">
+                <img src="${t.bannerUrl.startsWith('http') ? t.bannerUrl : pageContext.request.contextPath.concat('/').concat(t.bannerUrl)}"
+                     alt="${t.title}"
+                     class="movie-box-img">
 
-	<section class="home swiper" id="home">
-		<div class="swiper-wrapper">
-			<div class="swiper-slide container">
-				<img src="nhetanhdoday/asm.jpg" alt="Amazing Spider-Man-bg" />
-				<div class="home-text">
-					<div class="home-tags">
-						<span class="tag-trending">#1 Top Trending</span> <span
-							class="tag-quality">4K Ultra HD</span>
-					</div>
+                <div class="home-text">
+                    <div class="home-tags">
+                        <span class="tag-trending">#Top Trending</span>
+                        <c:if test="${t.premium}">
+                            <span class="tag-quality">VIP</span>
+                        </c:if>
+                    </div>
 
-					<h1>Amazing Spider-Man</h1>
+                    <h1>${t.title}</h1>
 
-					<div class="home-meta">
-						<span>2012</span> <i class='bx bxs-circle'></i> <span>Hành
-							Động, Phiêu Lưu</span> <i class='bx bxs-circle'></i> <span>2h 16m</span>
-					</div>
+                    <div class="home-meta">
+                        <span>${t.releaseYear}</span>
+                        <i class='bx bxs-circle'></i>
 
-					<p class="home-desc">Peter Parker, một học sinh trung học bị
-						ruồng bỏ, bị nhện nhiễm phóng xạ cắn và có được những khả năng
-						siêu phàm giống như nhện. Anh phải đối mặt với Lizard để bảo vệ
-						thành phố.</p>
+                        <c:choose>
+                            <c:when test="${t.series}">
+                                <c:if test="${t.lastestEp > 0}">
+                                    <span>${t.lastestEp} Tập</span>
+                                </c:if>
+                                <c:if test="${t.lastestEp == 0}">
+                                    <span>Full Season</span>
+                                </c:if>
+                            </c:when>
 
-					<div class="home-btns">
-						<a href="#" class="btn">Xem Ngay</a> <a href="#" class="play"
-							aria-label="Chi tiết"> <i class='bx bx-info-circle'></i></a>
-					</div>
-				</div>
-			</div>
-			<div class="swiper-slide container">
-				<img src="nhetanhdoday/genv.jpg" alt="GenV-bg" />
-				<div class="home-text">
-					<div class="home-tags">
-						<span class="tag-trending">Top 10 Series</span> <span
-							class="tag-quality">HD</span>
-					</div>
+                            <c:otherwise>
+                                <span>${t.durationMinutes} phút</span>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
 
-					<h1>Gen V: The Boys Spinoff</h1>
+                    <p class="home-desc" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                            ${t.description}
+                    </p>
 
-					<div class="home-meta">
-						<span>2023</span> <i class='bx bxs-circle'></i> <span>Viễn
-							Tưởng, Học Đường</span> <i class='bx bxs-circle'></i> <span>1
-							Season</span>
-					</div>
+                    <div class="home-btns">
+                        <a href="watch?id=${t.id}" class="btn">Xem Ngay</a>
+                        <a href="detail?id=${t.id}" class="play" aria-label="Chi tiết">
+                            <i class='bx bx-info-circle'></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
 
-					<p class="home-desc">Từ thế giới của The Boys, Gen V khám phá
-						lứa siêu anh hùng đầu tiên biết rằng sức mạnh của họ là do Hợp
-						chất V tiêm vào chứ không phải do Chúa ban tặng.</p>
+    </div>
+    <div class="swiper-pagination"></div>
+</section>
 
-					<div class="home-btns">
-						<a href="#" class="btn">Xem Ngay</a> <a href="#" class="play"
-							aria-label="Chi tiết"> <i class='bx bx-info-circle'></i></a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="swiper-pagination"></div>
-	</section>
+<section class="movies" id="phimle">
+    <h2 class="heading">Phim Chiếu Rạp Mới</h2>
 
-	<section class="movies" id="phimle">
-		<h2 class="heading">Phim Chiếu Rạp Mới</h2>
+    <div class="movies-slider swiper">
+        <div class="swiper-wrapper">
 
-		<div class="movies-slider swiper">
-			<div class="swiper-wrapper">
-				<div class="movie-box swiper-slide">
-					<a href="movie-page.html" class="movie-box-link">
-						<div class="movie-img-wrapper">
-							<img src="nhetanhdoday/ares_poster.jpg" alt="Poster phim"
-								class="movie-box-img">
-						</div>
-						<div class="box-text">
-							<h3 class="movie-title">Tron: Ares</h3>
+            <jsp:useBean id="phimle" scope="request" type="java.util.List"/>
+            <c:forEach items="${phimle}" var="o">
+                <div class="movie-box swiper-slide">
+                    <a href="detail?id=${o.id}" class="movie-box-link">
+                        <div class="movie-img-wrapper">
+                            <c:if test="${o.premium}">
+                                <span class="vip-badge">
+                                    <i class='bx bxs-crown'></i> VIP
+                                </span>
+                            </c:if>
+                            <img src="${o.posterUrl.startsWith('http') ? o.posterUrl : pageContext.request.contextPath.concat('/').concat(o.posterUrl)}"
+                                 alt="${o.title}"
+                                 class="movie-box-img">
+                        </div>
+                        <div class="box-text">
+                            <h3 class="movie-title">${o.title}</h3>
 
-							<span class="movie-type">Chiếu rạp / Hành động / Khoa học</span>
+                            <span class="movie-type">Chiếu rạp / Full HD</span>
 
-							<div class="movie-meta">
-								<span class="movie-badge">2025</span> <span class="movie-badge">120
-									phút</span>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="movie-box swiper-slide">
-					<a href="movie-page.html" class="movie-box-link">
-						<div class="movie-img-wrapper">
-							<img src="nhetanhdoday/conjuring_poster.jpg" alt="Poster phim"
-								class="movie-box-img">
-						</div>
-						<div class="box-text">
-							<h3 class="movie-title">The Conjuring: Nghi Lễ Cuối Cùng</h3>
-							<span class="movie-type">Chiếu rạp / Kinh dị</span>
-						</div>
-					</a>
-				</div>
-				<div class="movie-box swiper-slide">
-					<a href="movie-page.html" class="movie-box-link">
-						<div class="movie-img-wrapper">
-							<img src="nhetanhdoday/f1.jpg" alt="Poster phim"
-								class="movie-box-img">
-						</div>
-						<div class="box-text">
-							<h3 class="movie-title">Tay Đua F1</h3>
-							<span class="movie-type">Chiếu rạp / Chính kịch / Hành
-								động</span>
-						</div>
-					</a>
-				</div>
-				<div class="movie-box swiper-slide">
-					<a href="movie-page.html" class="movie-box-link">
-						<div class="movie-img-wrapper">
-							<img src="nhetanhdoday/spm.jpg" alt="Poster phim"
-								class="movie-box-img">
-						</div>
-						<div class="box-text">
-							<h3 class="movie-title">Superman</h3>
-							<span class="movie-type">Chiếu rạp / DC / Siêu anh hùng</span>
-						</div>
-					</a>
-				</div>
-				<div class="movie-box swiper-slide">
-					<a href="movie-page.html" class="movie-box-link">
-						<div class="movie-img-wrapper">
-							<img src="nhetanhdoday/fdb.jpg" alt="Poster phim"
-								class="movie-box-img">
-						</div>
-						<div class="box-text">
-							<h3 class="movie-title">Lưỡi Hái Tử Thần: Huyết Thống</h3>
-							<span class="movie-type">Chiếu rạp / Gay cấn / Kinh dị</span>
-						</div>
-					</a>
-				</div>
-				<div class="movie-box swiper-slide">
-					<a href="movie-page.html" class="movie-box-link">
-						<div class="movie-img-wrapper">
-							<img src="nhetanhdoday/hp.jpg" alt="Poster phim"
-								class="movie-box-img">
-						</div>
-						<div class="box-text">
-							<h3 class="movie-title">Harry Potter: Hoàng Tử Lai</h3>
-							<span class="movie-type">Kinh điển / Phép thuật / Phiêu
-								lưu</span>
-						</div>
-					</a>
-				</div>
-				<div class="movie-box swiper-slide">
-					<a href="movie-page.html" class="movie-box-link">
-						<div class="movie-img-wrapper">
-							<img src="nhetanhdoday/fantasic4.jpg" alt="Poster phim"
-								class="movie-box-img">
-						</div>
-						<div class="box-text">
-							<h3 class="movie-title">Bộ Tứ Siêu Đẳng: Bước Đi Đầu Tiên</h3>
-							<span class="movie-type">Chiếu rạp / Marvel / Siêu anh
-								hùng</span>
-						</div>
-					</a>
-				</div>
-				<div class="movie-box swiper-slide">
-					<a href="movie-page.html" class="movie-box-link">
-						<div class="movie-img-wrapper">
-							<img src="nhetanhdoday/exit8.jpg" alt="Poster phim"
-								class="movie-box-img">
-						</div>
-						<div class="box-text">
-							<h3 class="movie-title">Exit 8: Ga Tàu Vô Tận</h3>
-							<span class="movie-type">Chiếu rạp / Kinh dị / Bí ẩn</span>
-						</div>
-					</a>
-				</div>
-			</div>
-			<div class="swiper-button-next"></div>
-			<div class="swiper-button-prev"></div>
-		</div>
-	</section>
-	</section>
+                            <div class="movie-meta">
+                                <span class="movie-badge">${o.releaseYear}</span> <span class="movie-badge">
+								${o.durationMinutes} phút</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </c:forEach>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+</section>
 
-	<section class="genres" id="genres">
-		<h2 class="heading">Khám Phá Thể Loại</h2>
-		<div class="genres-grid">
-			<div class="genre-box">
-				<h3>Hành Động</h3>
-			</div>
-			<div class="genre-box">
-				<h3>Kinh Dị</h3>
-			</div>
-			<div class="genre-box">
-				<h3>Khoa Học</h3>
-			</div>
-			<div class="genre-box">
-				<h3>Tình Cảm</h3>
-			</div>
-			<div class="genre-box">
-				<h3>Hoạt Hình</h3>
-			</div>
-		</div>
-	</section>
-	<section class="movies" id="phimbo">
-		<h2 class="heading">Phim Bộ Hot</h2>
-		<div class="movies-slider swiper">
-			<div class="swiper-wrapper">
-				<div class="movie-box swiper-slide">
-					<a href="movie-page.html" class="movie-box-link">
-						<div class="movie-img-wrapper">
-							<img src="nhetanhdoday/thầy bạch.jpg" alt="Poster phim"
-								class="movie-box-img">
-						</div>
-						<div class="box-text">
-							<h3 class="movie-title">Biến chất</h3>
-							<span class="movie-type">Phim bộ / Hành động / Tâm lý</span>
-							<div class="movie-meta">
-								<span class="movie-badge">SS 4</span> <span class="movie-badge">EP
-									08</span>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="movie-box swiper-slide">
-					<a href="movie-page.html" class="movie-box-link">
-						<div class="movie-img-wrapper">
-							<img src="nhetanhdoday/IT.jpg" alt="Poster phim"
-								class="movie-box-img">
-						</div>
-						<div class="box-text">
-							<h3 class="movie-title">IT: chào mừng tới Derry</h3>
-							<span class="movie-type">Phim bộ / Kinh dị / tâm lý</span>
-						</div>
-					</a>
-				</div>
-				<div class="movie-box swiper-slide">
-					<a href="movie-page.html" class="movie-box-link">
-						<div class="movie-img-wrapper">
-							<img src="nhetanhdoday/GenV-part2.jpg" alt="Poster phim"
-								class="movie-box-img">
-						</div>
-						<div class="box-text">
-							<h3 class="movie-title">GenV</h3>
-							<span class="movie-type">Phim bộ / Hài hước / Hành động</span>
-						</div>
-					</a>
-				</div>
-				<div class="movie-box swiper-slide">
-					<a href="movie-page.html" class="movie-box-link">
-						<div class="movie-img-wrapper">
-							<img src="nhetanhdoday/Hannibal.jpg" alt="Poster phim"
-								class="movie-box-img">
-						</div>
-						<div class="box-text">
-							<h3 class="movie-title">Giáo sư ăn thịt người</h3>
-							<span class="movie-type">Phim bộ / Kinh dị / Hành động</span>
-						</div>
-					</a>
-				</div>
-				<div class="movie-box swiper-slide">
-					<a href="movie-page.html" class="movie-box-link">
-						<div class="movie-img-wrapper">
-							<img src="nhetanhdoday/Arcane.jpg" alt="Poster phim"
-								class="movie-box-img">
-						</div>
-						<div class="box-text">
-							<h3 class="movie-title">Arcane</h3>
-							<span class="movie-type">Phim Bộ / Gay cấn / Hành động</span>
-						</div>
-					</a>
-				</div>
-				<div class="movie-box swiper-slide">
-					<a href="movie-page.html" class="movie-box-link">
-						<div class="movie-img-wrapper">
-							<img src="nhetanhdoday/marvelZombies.jpg" alt="Poster phim"
-								class="movie-box-img">
-						</div>
-						<div class="box-text">
-							<h3 class="movie-title">Marvel Zombies</h3>
-							<span class="movie-type">Phim bộ / Giật gân / Phiêu lưu</span>
-						</div>
-					</a>
-				</div>
-				<div class="movie-box swiper-slide">
-					<a href="movie-page.html" class="movie-box-link">
-						<div class="movie-img-wrapper">
-							<img src="nhetanhdoday/theboys ốm hơnjpg.webp" alt="Poster phim"
-								class="movie-box-img">
-						</div>
-						<div class="box-text">
-							<h3 class="movie-title">The Boys</h3>
-							<span class="movie-type">Phim bộ / Hành động / Hài hước</span>
-						</div>
-					</a>
-				</div>
-				<div class="movie-box swiper-slide">
-					<a href="movie-page.html" class="movie-box-link">
-						<div class="movie-img-wrapper">
-							<img src="nhetanhdoday/naruto.jpg" alt="Poster phim"
-								class="movie-box-img">
-						</div>
-						<div class="box-text">
-							<h3 class="movie-title">Naruto</h3>
-							<span class="movie-type">Phim bộ / Hành động / Shounen</span>
-						</div>
-					</a>
-				</div>
-			</div>
-			<div class="swiper-button-next"></div>
-			<div class="swiper-button-prev"></div>
-		</div>
-	</section>
-	</section>
+<section class="genres" id="genres">
+    <h2 class="heading">Khám Phá Thể Loại</h2>
+    <div class="genres-grid">
+        <jsp:useBean id="GLOBAL_GENRES" scope="application" type="java.util.List"/>
+        <c:forEach items="${GLOBAL_GENRES}" var="g">
+            <a href="filter?genreId=${g.id}">
+                <div class="genre-box">
+                    <h3>${g.genresName}</h3>
+                </div>
+            </a>
+        </c:forEach>
+    </div>
+</section>
 
-	<section class="spotlight" id="spotlight">
-		<h2 class="spotlight-heading">
-			<i class='bx bx-line-chart'></i> Xu Hướng Nổi Bật
-		</h2>
+<section class="movies" id="phimbo">
+    <h2 class="heading">Phim Bộ Hot</h2>
+    <div class="movies-slider swiper">
+        <div class="swiper-wrapper">
 
-		<div class="spotlight-slider swiper">
-			<div class="swiper-wrapper">
+            <c:forEach items="${phimbo}" var="s">
+                <div class="movie-box swiper-slide">
+                    <a href="detail?id=${s.id}" class="movie-box-link">
+                        <div class="movie-img-wrapper">
+                            <c:if test="${s.premium}">
+                                <span class="vip-badge">
+                                    <i class='bx bxs-crown'></i> VIP
+                                </span>
+                            </c:if>
+                            <img src="${s.posterUrl.startsWith('http') ? s.posterUrl : pageContext.request.contextPath.concat('/').concat(s.posterUrl)}"
+                                 alt="${s.title}"
+                                 class="movie-box-img">
+                        </div>
+                        <div class="box-text">
+                            <h3 class="movie-title">${s.title}</h3>
 
-				<div class="swiper-slide spotlight-inner">
-					<div class="spotlight-content">
-						<span class="spotlight-tag">#1 Hành Động</span>
-						<h2 class="spotlight-title">John Wick: Chapter 4</h2>
-						<p class="spotlight-desc">Sát thủ huyền thoại John Wick tìm ra
-							con đường để đánh bại High Table. Nhưng trước khi có thể kiếm
-							được tự do, Wick phải đối đầu với một kẻ thù mới.</p>
-						<div class="home-btns"
-							style="display: flex; gap: 1rem; margin-top: 1rem;">
-							<a href="#" class="btn">Xem Ngay</a> <a href="#" class="play"><i
-								class='bx bx-info-circle'></i></a>
-						</div>
-					</div>
-					<div class="spotlight-img">
-						<img src="nhetanhdoday/f1.jpg" alt="John Wick Poster">
-					</div>
-				</div>
+                            <span class="movie-type">Series / ${s.releaseYear}</span>
 
-				<div class="swiper-slide spotlight-inner">
-					<div class="spotlight-content">
-						<span class="spotlight-tag">#1 Chính Kịch</span>
-						<h2 class="spotlight-title">Oppenheimer</h2>
-						<p class="spotlight-desc">Câu chuyện về nhà vật lý người Mỹ J.
-							Robert Oppenheimer và vai trò của ông trong việc phát triển bom
-							nguyên tử.</p>
-						<div class="home-btns"
-							style="display: flex; gap: 1rem; margin-top: 1rem;">
-							<a href="#" class="btn">Xem Ngay</a> <a href="#" class="play"><i
-								class='bx bx-info-circle'></i></a>
-						</div>
-					</div>
-					<div class="spotlight-img">
-						<img src="nhetanhdoday/f1.jpg" alt="Oppenheimer Poster">
-					</div>
-				</div>
+                            <div class="movie-meta">
+                                <c:if test="${s.lastestEp > 0}">
+                        <span class="movie-badge">Tập ${s.lastestEp}</span>
+                                </c:if>
+                                <c:if test="${s.lastestEp == 0}">
+                                    <span class="movie-badge">Sắp chiếu</span>
+                                </c:if>
+                            </div>
 
-			</div>
-			<div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-		</div>
-	</section>
-	<section class="explore" id="explore">
-		<h2 class="heading"
-			style="text-align: left; border: none; margin-left: 0;">
-			<i class='bx bx-collection'></i> Bộ Sưu Tập Tuyển Chọn
-		</h2>
+                        </div>
+                    </a>
+                </div>
+            </c:forEach>
 
-		<div class="explore-slider swiper">
-			<div class="swiper-wrapper">
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+</section>
 
-				<div class="swiper-slide wide-box">
-					<a href="movie-page.html">
-						<div class="wide-img">
-							<img src="nhetanhdoday/asm.jpg" alt="">
-							<div class="wide-play">
-								<i class='bx bx-play'></i>
-							</div>
-							<div class="wide-overlay">
-								<div class="wide-text">
-									<span>Marvel</span>
-									<h3>Vũ Trụ Người Nhện</h3>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
+<section class="spotlight" id="spotlight">
+    <h2 class="spotlight-heading">
+        <i class='bx bx-line-chart'></i> Xu Hướng Nổi Bật
+    </h2>
 
-				<div class="swiper-slide wide-box">
-					<a href="movie-page.html">
-						<div class="wide-img">
-							<img src="nhetanhdoday/f1.jpg" alt="">
-							<div class="wide-play">
-								<i class='bx bx-play'></i>
-							</div>
-							<div class="wide-overlay">
-								<div class="wide-text">
-									<span>Thể Thao</span>
-									<h3>Tốc Độ & Kịch Tính</h3>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
+    <div class="spotlight-slider swiper">
+        <div class="swiper-wrapper">
 
-				<div class="swiper-slide wide-box">
-					<a href="movie-page.html">
-						<div class="wide-img">
-							<img src="nhetanhdoday/conjuring_poster.jpg" alt="">
-							<div class="wide-play">
-								<i class='bx bx-play'></i>
-							</div>
-							<div class="wide-overlay">
-								<div class="wide-text">
-									<span>Kinh Dị</span>
-									<h3>Vũ Trụ The Conjuring</h3>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
+            <c:if test="${spotlightAction != null}">
+                <div class="swiper-slide spotlight-inner">
+                    <div class="spotlight-content">
+                        <span class="spotlight-tag">#1 Hành Động</span>
+                        <h2 class="spotlight-title">${spotlightAction.title}</h2>
+                        <p class="spotlight-desc" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                                ${spotlightAction.description}
+                        </p>
+                        <div class="home-btns" style="display: flex; gap: 1rem; margin-top: 1rem;">
+                            <a href="detail?id=${spotlightAction.id}" class="btn">Xem Ngay</a>
+                            <a href="detail?id=${spotlightAction.id}" class="play"><i class='bx bx-info-circle'></i></a>
+                        </div>
+                    </div>
+                    <div class="spotlight-img">
+                        <img src="${spotlightAction.posterUrl}" alt="${spotlightAction.title}">
+                    </div>
+                </div>
+            </c:if>
 
-				<div class="swiper-slide wide-box">
-					<a href="movie-page.html">
-						<div class="wide-img">
-							<img src="nhetanhdoday/genv.jpg" alt="">
-							<div class="wide-play">
-								<i class='bx bx-play'></i>
-							</div>
-							<div class="wide-overlay">
-								<div class="wide-text">
-									<span>Series</span>
-									<h3>Thế Giới The Boys</h3>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
+            <c:if test="${spotlightDrama != null}">
+                <div class="swiper-slide spotlight-inner">
+                    <div class="spotlight-content">
+                        <span class="spotlight-tag">#1 Chính Kịch</span>
+                        <h2 class="spotlight-title">${spotlightDrama.title}</h2>
+                        <p class="spotlight-desc" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                                ${spotlightDrama.description}
+                        </p>
+                        <div class="home-btns" style="display: flex; gap: 1rem; margin-top: 1rem;">
+                            <a href="detail?id=${spotlightDrama.id}" class="btn">Xem Ngay</a>
+                            <a href="detail?id=${spotlightDrama.id}" class="play"><i class='bx bx-info-circle'></i></a>
+                        </div>
+                    </div>
+                    <div class="spotlight-img">
+                        <img src="${spotlightDrama.posterUrl}" alt="${spotlightDrama.title}">
+                    </div>
+                </div>
+            </c:if>
 
-				<div class="swiper-slide wide-box">
-					<a href="movie-page.html">
-						<div class="wide-img">
-							<img src="nhetanhdoday/fantasic4.jpg" alt="">
-							<div class="wide-play">
-								<i class='bx bx-play'></i>
-							</div>
-							<div class="wide-overlay">
-								<div class="wide-text">
-									<span>Marvel</span>
-									<h3>Biệt Đội Siêu Anh Hùng</h3>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+</section>
 
-			</div>
-			<div class="swiper-button-next"></div>
-			<div class="swiper-button-prev"></div>
-		</div>
-	</section>
-	<section class="movies" id="phimle">
-		<h2 class="heading">Phim Sắp Chiếu</h2>
+<div class="explore-slider swiper">
+    <div class="swiper-wrapper">
+    <c:forEach items="${collections}" var="c">
+        <div class="swiper-slide wide-box">
+                <div class="wide-img">
+                    <img src="${c.bannerUrl.startsWith('http') ? c.bannerUrl : pageContext.request.contextPath.concat('/').concat(c.bannerUrl)}"
+                         alt="${c.name}"
+                         style="width: 100%; height: 100%; object-fit: cover;">
 
-		<div class="movies-slider swiper">
-			<div class="swiper-wrapper">
-				<div class="movie-box swiper-slide">
-					<a href="movie-page.html" class="movie-box-link">
-						<div class="movie-img-wrapper">
-							<img src="nhetanhdoday/ares_poster.jpg" alt="Poster phim"
-								class="movie-box-img">
-						</div>
-						<div class="box-text">
-							<h3 class="movie-title">Tron: Ares</h3>
+                    <div class="wide-play">
+                        <i class='bx bx-play'></i>
+                    </div>
 
-							<span class="movie-type">Chiếu rạp / Hành động / Khoa học</span>
+                    <div class="wide-overlay">
+                        <div class="wide-text">
+                            <span>Bộ Sưu Tập Tuyển Chọn</span>
+                            <h3>${c.name}</h3>
+                            <p>${c.description}</p>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </c:forEach>
+</div>
+</div>
 
-							<div class="movie-meta">
-								<span class="movie-badge">2025</span> <span class="movie-badge">120
-									phút</span>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="movie-box swiper-slide">
-					<a href="movie-page.html" class="movie-box-link">
-						<div class="movie-img-wrapper">
-							<img src="nhetanhdoday/conjuring_poster.jpg" alt="Poster phim"
-								class="movie-box-img">
-						</div>
-						<div class="box-text">
-							<h3 class="movie-title">The Conjuring: Nghi Lễ Cuối Cùng</h3>
-							<span class="movie-type">Chiếu rạp / Kinh dị</span>
-						</div>
-					</a>
-				</div>
-				<div class="movie-box swiper-slide">
-					<a href="movie-page.html" class="movie-box-link">
-						<div class="movie-img-wrapper">
-							<img src="nhetanhdoday/f1.jpg" alt="Poster phim"
-								class="movie-box-img">
-						</div>
-						<div class="box-text">
-							<h3 class="movie-title">Tay Đua F1</h3>
-							<span class="movie-type">Chiếu rạp / Chính kịch / Hành
-								động</span>
-						</div>
-					</a>
-				</div>
-				<div class="movie-box swiper-slide">
-					<a href="movie-page.html" class="movie-box-link">
-						<div class="movie-img-wrapper">
-							<img src="nhetanhdoday/spm.jpg" alt="Poster phim"
-								class="movie-box-img">
-						</div>
-						<div class="box-text">
-							<h3 class="movie-title">Superman</h3>
-							<span class="movie-type">Chiếu rạp / DC / Siêu anh hùng</span>
-						</div>
-					</a>
-				</div>
-				<div class="movie-box swiper-slide">
-					<a href="movie-page.html" class="movie-box-link">
-						<div class="movie-img-wrapper">
-							<img src="nhetanhdoday/fdb.jpg" alt="Poster phim"
-								class="movie-box-img">
-						</div>
-						<div class="box-text">
-							<h3 class="movie-title">Lưỡi Hái Tử Thần: Huyết Thống</h3>
-							<span class="movie-type">Chiếu rạp / Gay cấn / Kinh dị</span>
-						</div>
-					</a>
-				</div>
-				<div class="movie-box swiper-slide">
-					<a href="movie-page.html" class="movie-box-link">
-						<div class="movie-img-wrapper">
-							<img src="nhetanhdoday/hp.jpg" alt="Poster phim"
-								class="movie-box-img">
-						</div>
-						<div class="box-text">
-							<h3 class="movie-title">Harry Potter: Hoàng Tử Lai</h3>
-							<span class="movie-type">Kinh điển / Phép thuật / Phiêu
-								lưu</span>
-						</div>
-					</a>
-				</div>
-				<div class="movie-box swiper-slide">
-					<a href="movie-page.html" class="movie-box-link">
-						<div class="movie-img-wrapper">
-							<img src="nhetanhdoday/fantasic4.jpg" alt="Poster phim"
-								class="movie-box-img">
-						</div>
-						<div class="box-text">
-							<h3 class="movie-title">Bộ Tứ Siêu Đẳng: Bước Đi Đầu Tiên</h3>
-							<span class="movie-type">Chiếu rạp / Marvel / Siêu anh
-								hùng</span>
-						</div>
-					</a>
-				</div>
-				<div class="movie-box swiper-slide">
-					<a href="movie-page.html" class="movie-box-link">
-						<div class="movie-img-wrapper">
-							<img src="nhetanhdoday/exit8.jpg" alt="Poster phim"
-								class="movie-box-img">
-						</div>
-						<div class="box-text">
-							<h3 class="movie-title">Exit 8: Ga Tàu Vô Tận</h3>
-							<span class="movie-type">Chiếu rạp / Kinh dị / Bí ẩn</span>
-						</div>
-					</a>
-				</div>
-			</div>
-			<div class="swiper-button-next"></div>
-			<div class="swiper-button-prev"></div>
-		</div>
-	</section>
-	<jsp:include page="footer.jsp" />
-	<script
-		src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-	<script src="main.js"></script>
+<section class="movies" id="sapchieu">
+    <h2 class="heading">Phim Sắp Chiếu</h2>
 
+    <div class="movies-slider swiper">
+        <div class="swiper-wrapper">
+
+            <c:forEach items="${phimsapchieu}" var="o">
+                <div class="movie-box swiper-slide">
+                    <a href="detail?id=${o.id}" class="movie-box-link">
+                        <div class="movie-img-wrapper">
+                            <c:if test="${o.premium}">
+                                <span class="vip-badge">
+                                    <i class='bx bxs-crown'></i> VIP
+                                </span>
+                            </c:if>
+                            <img src="${o.posterUrl.startsWith('http') ? o.posterUrl : pageContext.request.contextPath.concat('/').concat(o.posterUrl)}"
+                                 alt="${o.title}"
+                                 class="movie-box-img">
+                        </div>
+                        <div class="box-text">
+                            <h3 class="movie-title">${o.title}</h3>
+                            <span class="movie-type">Coming Soon</span>
+                            <div class="movie-meta">
+                                <span class="movie-badge">${o.releaseYear}</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </c:forEach>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<jsp:include page="footer.jsp"/>
 </body>
+
 </html>

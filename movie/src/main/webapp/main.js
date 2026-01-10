@@ -1,11 +1,7 @@
-/* ====================================================== */
-/* MAIN.JS - ĐÃ SỬA LỖI & TỐI ƯU CHO MỌI TRANG            */
-/* ====================================================== */
-
 document.addEventListener("DOMContentLoaded", function () {
 
     /* ====================================================== */
-    /* 1. Code cho "Hero Slider" (Chỉ chạy nếu có .home.swiper) */
+    /* 1. Code cho "Hero Slider" (Trang chủ)                  */
     /* ====================================================== */
     if (document.querySelector(".home.swiper")) {
         var swiperHome = new Swiper(".home.swiper", {
@@ -45,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     /* ====================================================== */
-    /* 3. Slider Trending (Nếu có sử dụng)                    */
+    /* 3. Slider Trending                                     */
     /* ====================================================== */
     if (document.querySelector(".trending-slider")) {
         var swiperTrending = new Swiper(".trending-slider", {
@@ -62,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     /* ====================================================== */
-    /* 4. Slider Explore (Bộ sưu tập - 3 phim/hàng)           */
+    /* 4. Slider Explore                                      */
     /* ====================================================== */
     if (document.querySelector(".explore-slider")) {
         var swiperExplore = new Swiper(".explore-slider", {
@@ -82,11 +78,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     /* ====================================================== */
-    /* 5. Header "Thu nhỏ khi cuộn"                           */
+    /* 5. Header "Thu nhỏ/Đổi màu khi cuộn"                   */
     /* ====================================================== */
     let header = document.querySelector('header');
     if (header) {
         window.addEventListener('scroll', () => {
+            // Khi cuộn xuống quá 50px thì thêm class 'scrolled'
             if (window.scrollY > 50) {
                 header.classList.add('scrolled');
             } else {
@@ -96,53 +93,57 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     /* ====================================================== */
-    /* 6. Xử lý Dropdown Menu & User Profile                  */
+    /* 6. Xử lý Dropdown Menu (ĐÃ SỬA LẠI LOGIC)              */
     /* ====================================================== */
-    
-    // 6.1 Xử lý Menu "Thể loại"
-    const categoryDropdown = document.querySelector('.dropdown-item:not(.user-profile)');
+
+    // Tìm phần tử bằng ID để chính xác tuyệt đối (Tránh nhầm class)
+    const genreDropdown = document.getElementById('genre-dropdown');
     const userProfile = document.querySelector('.user-profile');
 
-    if (categoryDropdown) {
-        const categoryLink = categoryDropdown.querySelector('a');
-        const categoryMenu = categoryDropdown.querySelector('.dropdown-menu');
+    // 6.1 Xử lý Menu "Thể loại"
+    if (genreDropdown) {
+        genreDropdown.addEventListener('click', function (e) {
+            // Nếu click vào chính cái menu thì không làm gì (để nó xổ xuống)
+            // Chỉ ngăn chặn hành vi nếu thẻ a có href="#"
 
-        categoryLink.addEventListener('click', function (e) {
-            e.preventDefault();
-            // Đóng menu User nếu đang mở
-            if (userProfile) userProfile.classList.remove('active');
-            
-            categoryDropdown.classList.toggle('active');
-            categoryMenu.classList.toggle('show');
-        });
-    }
-
-    // 6.2 Xử lý Menu "User Profile" (Avatar)
-    if (userProfile) {
-        const profileToggle = userProfile.querySelector('.profile-toggle');
-        
-        profileToggle.addEventListener('click', function (e) {
-            e.preventDefault();
-            e.stopPropagation(); // Ngăn sự kiện nổi bọt
-            
-            // Đóng menu Thể loại nếu đang mở
-            if (categoryDropdown) {
-                categoryDropdown.classList.remove('active');
-                const catMenu = categoryDropdown.querySelector('.dropdown-menu');
-                if (catMenu) catMenu.classList.remove('show');
+            // Đóng User Profile nếu đang mở
+            if (userProfile && userProfile.classList.contains('active')) {
+                userProfile.classList.remove('active');
             }
 
-            // Bật/Tắt menu User
-            userProfile.classList.toggle('active');
+            // Toggle class active
+            this.classList.toggle('active');
+
+            // Tìm menu con bên trong và toggle class show
+            const menu = this.querySelector('.dropdown-menu');
+            if (menu) menu.classList.toggle('show');
+
+            e.stopPropagation(); // Ngăn không cho sự kiện lan ra ngoài
         });
     }
 
-    // 6.3 Click ra ngoài thì đóng tất cả
+    // 6.2 Xử lý Menu "User Profile"
+    if (userProfile) {
+        userProfile.addEventListener('click', function (e) {
+            // Đóng menu Thể loại nếu đang mở
+            if (genreDropdown) {
+                genreDropdown.classList.remove('active');
+                const gMenu = genreDropdown.querySelector('.dropdown-menu');
+                if (gMenu) gMenu.classList.remove('show');
+            }
+
+            // Toggle bản thân nó
+            this.classList.toggle('active');
+            e.stopPropagation();
+        });
+    }
+
+    // 6.3 Click ra ngoài khoảng trống thì đóng tất cả
     document.addEventListener('click', function (e) {
         // Nếu click ra ngoài Thể loại
-        if (categoryDropdown && !categoryDropdown.contains(e.target)) {
-            categoryDropdown.classList.remove('active');
-            const menu = categoryDropdown.querySelector('.dropdown-menu');
+        if (genreDropdown && !genreDropdown.contains(e.target)) {
+            genreDropdown.classList.remove('active');
+            const menu = genreDropdown.querySelector('.dropdown-menu');
             if (menu) menu.classList.remove('show');
         }
 
@@ -153,6 +154,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+
+// Slider Spotlight (nếu có)
 if (document.querySelector(".spotlight-slider")) {
     var swiperSpotlight = new Swiper(".spotlight-slider", {
         spaceBetween: 30,
@@ -161,14 +164,72 @@ if (document.querySelector(".spotlight-slider")) {
             delay: 4000,
             disableOnInteraction: false,
         },
-        // Hiệu ứng mờ dần (Fade) cho đẹp
-        effect: 'fade', 
+        effect: 'fade',
         fadeEffect: { crossFade: true },
-        
-        // KÍCH HOẠT NÚT MŨI TÊN
         navigation: {
             nextEl: ".spotlight-slider .swiper-button-next",
             prevEl: ".spotlight-slider .swiper-button-prev",
         },
     });
+}
+/* =========================================
+   XỬ LÝ TÌM KIẾM AJAX (LIVE SEARCH)
+   ========================================= */
+
+function searchByName(param) {
+    var txtSearch = param.value;
+    var resultContainer = document.getElementById("search-results-container");
+
+    if (txtSearch.trim() === "") {
+        resultContainer.style.display = "none";
+        resultContainer.innerHTML = "";
+        return;
+    }
+
+    fetch("ajax-search?query=" + encodeURIComponent(txtSearch))
+        .then(response => response.text())
+        .then(data => {
+            // Nhét HTML nhận được vào hộp
+            resultContainer.innerHTML = data;
+
+            // Nếu có phim thì hiện lên, không thì ẩn
+            if (data.trim() !== "") {
+                resultContainer.style.display = "block";
+            } else {
+                resultContainer.style.display = "none";
+            }
+        })
+        .catch(error => console.error('Lỗi Ajax Search:', error));
+}
+
+
+document.addEventListener('click', function(e) {
+    var container = document.querySelector('.search-box-wrapper');
+    var resultBox = document.getElementById("search-results-container");
+
+
+    if (container && resultBox && !container.contains(e.target)) {
+        resultBox.style.display = "none";
+    }
+});
+    // Phần Hồ Sơ Cá Nhân : Switch Tab
+function switchProfileTab(tabName) {
+    // 1. Ẩn tất cả tab nội dung
+    var contents = document.querySelectorAll('.tab-content');
+    contents.forEach(function(content) {
+        content.classList.remove('active');
+    });
+
+    // 2. Bỏ active ở tất cả nút sidebar
+    document.getElementById('btn-profile').classList.remove('active');
+    document.getElementById('btn-membership').classList.remove('active');
+
+    // 3. Hiện tab được chọn
+    if(tabName === 'profile') {
+        document.getElementById('tab-profile').classList.add('active');
+        document.getElementById('btn-profile').classList.add('active');
+    } else if (tabName === 'membership') {
+        document.getElementById('tab-membership').classList.add('active');
+        document.getElementById('btn-membership').classList.add('active');
+    }
 }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,9 +19,13 @@
     <section class="form-section" id="login">
         <div class="form-container">
             <h2 class="heading">Đăng Nhập</h2>
-            
+            <c:if test="${not empty mess}">
+                <div class="alert alert-danger" style="color: red; text-align: center; margin-bottom: 10px;">
+                        ${mess}
+                </div>
+            </c:if>
             <form action="login" method="POST" class="form-content">
-
+                <input type="hidden" name="redirect" value="${param.redirect}">
                 <div class="form-input-group">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" id="email" name="email" class="form-input" placeholder="Email" required>
