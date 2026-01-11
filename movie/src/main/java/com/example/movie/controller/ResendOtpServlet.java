@@ -23,7 +23,9 @@ public class ResendOtpServlet extends HttpServlet {
         }
 
         String newCode = EmailUtils.getRandomCode();
-        EmailUtils.sendEmail(pendingUser.getEmail(), newCode);
+        String subject = "Gửi lại mã xác thực -movie369";
+        String body = "Mã xác thực mới của bạn là:" + newCode +"\nmã có hiệu lực trong 5 phút";
+        EmailUtils.sendEmail(pendingUser.getEmail(), subject,body);
 
         session.setAttribute("authCode", newCode);
 

@@ -22,7 +22,7 @@
         <form action="verify" method="POST" class="form-content">
             <div class="form-input-group">
                 <label class="form-label">Nhập mã 6 số</label>
-                <input type="text" name="otp" class="form-input" placeholder="Ví dụ: 123456"
+                <input type="text" name="authCode" class="form-input" placeholder="Ví dụ: 123456"
                        style="text-align: center; letter-spacing: 5px; font-weight: bold; font-size: 1.2rem;" required>
             </div>
 

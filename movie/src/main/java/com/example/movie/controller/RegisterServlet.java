@@ -1,4 +1,5 @@
 package com.example.movie.controller;
+
 import com.example.movie.dao.UserDAO;
 import com.example.movie.model.User;
 import com.example.movie.utils.EmailUtils;
@@ -23,28 +24,43 @@ public class RegisterServlet extends HttpServlet {
         String pass = request.getParameter("password");
         String rePass = request.getParameter("re-password");
 
-        //Check nhập lại pass
-        if(!pass.equals(rePass)) {
+        // 1. Check nhập lại pass
+        if (!pass.equals(rePass)) {
             request.setAttribute("mess", "Mật khẩu nhập lại không khớp!");
             request.getRequestDispatcher("register.jsp").forward(request, response);
+            return; // <--- QUAN TRỌNG: Phải có return để dừng code tại đây
         }
 
-        //Check email đã tồn tại hay chưa
+        // 2. Check email đã tồn tại hay chưa
         UserDAO dao = new UserDAO();
-        if(dao.checkEmailExist(email)) {
+        if (dao.checkEmailExist(email)) {
             request.setAttribute("mess", "Email này đã được sử dụng!");
             request.getRequestDispatcher("register.jsp").forward(request, response);
+            return; // <--- QUAN TRỌNG: Phải có return
         }
+
+        // 3. Mã hóa mật khẩu
         String hashPass = HashUtils.hashPassword(pass);
 
-        String otp = EmailUtils.getRandomCode();
-        EmailUtils.sendEmail(email, otp);
+        // 4. Tạo mã OTP (Đây là đoạn bạn bị thiếu)
+        String code = EmailUtils.getRandomCode(); // Tạo mã ngẫu nhiên
+
+        // 5. Soạn nội dung và gửi mail
+        String subject = "Xác thực đăng ký tài khoản Movie369";
+        String body = "Mã xác thực của bạn là: " + code + "\nMã này có hiệu lực trong vòng 5 phút.";
+
+        EmailUtils.sendEmail(email, subject, body);
+
+        // 6. Tạo đối tượng User tạm thời (chưa lưu vào DB ngay)
+        // Lưu ý: Đảm bảo Constructor của User khớp với các tham số này
         User temp = new User(0, user, email, hashPass, null, "User", false, null, null);
 
+        // 7. Lưu vào Session để sang trang verify.jsp kiểm tra
         HttpSession session = request.getSession();
         session.setAttribute("pendingUser", temp);
-        session.setAttribute("authCode", otp);
+        session.setAttribute("authCode", code); // Sửa 'otp' thành 'code' cho đồng bộ
 
+        // 8. Chuyển hướng sang trang nhập mã
         response.sendRedirect("verify.jsp");
     }
 }

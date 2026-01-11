@@ -2,8 +2,6 @@ package com.example.movie.utils;
 
 import javax.mail.*;
 import javax.mail.internet.*;
-import javax.mail.Authenticator;
-import java.net.PasswordAuthentication;
 import java.util.Properties;
 import java.util.Random;
 
@@ -15,7 +13,7 @@ public class EmailUtils {
         return String.format("%06d", num);
     }
 
-    public static void sendEmail(String toEmail, String code) {
+    public static void sendEmail(String toEmail ,String subject , String body) {
         // Cấu hình Email của bạn (ADMIN)
         final String fromEmail = "23130367@st.hcmuaf.edu.vn";
         final String password = "ywxk npmb uizx jhkl"; // App Password
@@ -41,8 +39,8 @@ public class EmailUtils {
             msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
             msg.setFrom(new InternetAddress(fromEmail, "Movie369 Admin"));
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
-            msg.setSubject("Xác thực đăng ký tài khoản Movie369");
-            msg.setText("Mã xác thực của bạn là: " + code + "\nMã này có hiệu lực trong vòng 5 phút.", "UTF-8");
+            msg.setSubject(subject , "UTF-8");
+            msg.setText(body , "UTF-8");
 
             Transport.send(msg);
             System.out.println("Gửi mail thành công!");

@@ -241,4 +241,32 @@ public class UserDAO extends DBContext {
             e.printStackTrace();
         }
     }
+    // Hàm đổi mật khẩu mới
+    public void changePassword(String email, String newPass) {
+        // ⚠️ QUAN TRỌNG: Kiểm tra kỹ tên cột là 'password' hay 'password_hash'
+        // Mở SQL Server ra xem bảng Users, cột mật khẩu tên là gì thì sửa vào đây
+        String sql = "UPDATE Users SET password = ? WHERE email = ?";
+
+        try {
+            Connection conn = new DBContext().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, newPass);
+            ps.setString(2, email);
+
+            int rows = ps.executeUpdate(); // Trả về số dòng đã sửa
+
+            // --- IN RA LOG ĐỂ KIỂM TRA ---
+            if (rows > 0) {
+                System.out.println(" UPDATE THÀNH CÔNG! Mật khẩu mới đã lưu cho: " + email);
+                System.out.println(" Mật khẩu mã hóa lưu vào DB là: " + newPass);
+            } else {
+                System.out.println(" UPDATE THẤT BẠI! Không tìm thấy email: " + email);
+                System.out.println("Hãy kiểm tra lại xem Email trong DB có đúng y hệt không?");
+            }
+
+        } catch (Exception e) {
+            System.out.println(" LỖI SQL RỒI: " + e.getMessage());
+            e.printStackTrace(); // In lỗi đỏ ra màn hình console
+        }
+    }
 }

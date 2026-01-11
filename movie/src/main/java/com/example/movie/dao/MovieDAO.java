@@ -63,7 +63,7 @@ public class MovieDAO {
     }
 
     public void insertMovie(Movie m) {
-        String sql = "INSERT INTO Movies (movieName, description, yearRelease, duration, poster_url, trailer_url, video_url, isPremium, isSeries, status, view_count, rate_avg, rate_count) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0, 0)";
+        String sql = "INSERT INTO Movies (movieName, description, yearRelease, duration, poster_url, trailer_url, video_url, isPremium, isSeries, status, view_count, rate_avg, rate_count) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, 0, 0, 0)";
         try {
             Connection conn = new DBContext().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -72,11 +72,12 @@ public class MovieDAO {
             ps.setInt(3, m.getReleaseYear());
             ps.setInt(4, m.getDurationMinutes());
             ps.setString(5, m.getPosterUrl());
-            ps.setString(6, m.getTrailerUrl());
-            ps.setString(7, m.getMovieUrl()); // Lưu ý: Trong Model là movieUrl, DB là video_url
-            ps.setBoolean(8, m.isPremium());
-            ps.setBoolean(9, m.isSeries());
-            ps.setString(10, m.getStatus());
+            ps.setString(6,m.getBannerUrl());
+            ps.setString(7, m.getTrailerUrl());
+            ps.setString(8, m.getMovieUrl()); // Lưu ý: Trong Model là movieUrl, DB là video_url
+            ps.setBoolean(9, m.isPremium());
+            ps.setBoolean(10, m.isSeries());
+            ps.setString(11, m.getStatus());
             ps.executeUpdate();
         } catch (Exception e) { e.printStackTrace(); }
     }
@@ -300,7 +301,7 @@ public class MovieDAO {
                         rs.getBoolean("isPremium"),
                         rs.getBoolean("isSeries"),
                         rs.getString("status")
-                        );
+                );
                 m.setLastestEp(rs.getInt("latest_ep"));
                 list.add(m);
             }
@@ -427,7 +428,7 @@ public class MovieDAO {
             ps.setBoolean(1, seriesCheck);
             rs = ps.executeQuery();
             while(rs.next()) {
-              Movie m = new Movie(
+                Movie m = new Movie(
                         rs.getInt("id"),
                         rs.getString("movieName"),
                         rs.getString("description"),
@@ -484,7 +485,7 @@ public class MovieDAO {
                 m.setPremium(rs.getBoolean("isPremium"));
                 m.setGenreId(rs.getInt("idGenre"));
                 return m;
-        }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
