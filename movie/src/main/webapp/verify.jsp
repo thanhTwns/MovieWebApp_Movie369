@@ -19,7 +19,7 @@
             <p>Mã xác thực đã được gửi tới email của bạn.</p>
         </div>
 
-        <form action="verify" method="POST" class="form-content">
+        <form action="${actionUrl}" method="POST" class="form-content">
             <div class="form-input-group">
                 <label class="form-label">Nhập mã 6 số</label>
                 <input type="text" name="otp" class="form-input" placeholder="Ví dụ: 123456"

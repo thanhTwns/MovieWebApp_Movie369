@@ -45,6 +45,8 @@ public class RegisterServlet extends HttpServlet {
         session.setAttribute("pendingUser", temp);
         session.setAttribute("authCode", otp);
 
-        response.sendRedirect("verify.jsp");
+        request.setAttribute("actionUrl", "verify");
+        request.setAttribute("mess", "Đăng ký thành công, hãy nhập mã!");
+        request.getRequestDispatcher("verify.jsp").forward(request, response);
     }
 }

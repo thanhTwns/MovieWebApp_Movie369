@@ -3,6 +3,7 @@ package com.example.movie.dao;
 import com.example.movie.context.DBContext;
 import com.example.movie.model.PaymentHistory;
 import com.example.movie.model.User;
+import com.example.movie.utils.HashUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +13,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO extends DBContext {
+
+    public void updatePassword(String email, String password) {
+        String sql = "UPDATE Users SET password_hash = ? WHERE email = ?";
+        try {
+            Connection conn = getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            String newPassword = HashUtils.hashPassword(password);
+            ps.setString(1, newPassword);
+            ps.setString(2, email);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public int countTotalUsers() {
         String sql = "SELECT COUNT(*) FROM Users";

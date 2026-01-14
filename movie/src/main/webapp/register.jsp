@@ -19,7 +19,7 @@
         <div class="form-container">
             <h2 class="heading">Tạo Tài Khoản</h2>
             
-            <form action="register" method="POST" class="form-content">
+            <form action="${actionUrl}" method="POST" class="form-content">
                 
                 <div class="form-input-group">
                     <label for="username" class="form-label">Tên tài khoản</label>

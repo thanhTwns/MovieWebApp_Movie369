@@ -37,7 +37,7 @@
                 </div>
                 
                 <div class="form-options">
-                    <a href="forgot-password.jsp" class="form-link">Quên mật khẩu?</a>
+                    <a href="forgotPassword" class="form-link">Quên mật khẩu?</a>
                 </div>
 
                 <button type="submit" class="btn btn-full">Đăng Nhập</button>
