@@ -19,8 +19,7 @@ public class UserDAO extends DBContext {
         try {
             Connection conn = getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            String newPassword = HashUtils.hashPassword(password);
-            ps.setString(1, newPassword);
+            ps.setString(1, password);
             ps.setString(2, email);
             ps.executeUpdate();
         } catch (Exception e) {

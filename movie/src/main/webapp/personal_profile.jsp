@@ -50,7 +50,7 @@
 
         <div style="height: 1px; background: #333; margin: 10px 0;"></div>
 
-        <a href="change_password.jsp" class="sidebar-btn">Đổi mật khẩu</a>
+        <a href="changePassword" class="sidebar-btn">Đổi mật khẩu</a>
         <a href="LogoutServlet" class="sidebar-btn" style="color: #ff4444; border-color: #552222;">Đăng xuất</a>
     </aside>
 
