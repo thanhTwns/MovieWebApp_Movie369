@@ -33,17 +33,16 @@ public class DetailServlet extends HttpServlet {
             Movie movie = MovieDAO.getMovieByID(id);
 
             if (movie != null) {
-
                 MovieDAO movieDAO = new MovieDAO();
                 List<Movie> relatedList = movieDAO.getRelatedMovies(movie.getGenreId(), movie.getId());
                 req.setAttribute("relatedMovies", relatedList);
-
-                if(movie.isPremium()) {
+                if (movie.isPremium()) {
                     HttpSession session = req.getSession();
-                    User user = (User) session.getAttribute("account");
+                    User user = (User) session.getAttribute("user");
                     if (user == null) {
                         session.setAttribute("redirectAfterLogin", "detail?id=" + id);
                         resp.sendRedirect("login.jsp?message=login-required");
+                        return;
                     }
                     if (!user.isPremium()) {
                         resp.sendRedirect("user-profile?tab=membership&msg=vip_required");
